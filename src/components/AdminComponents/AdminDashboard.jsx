@@ -11,6 +11,7 @@ import { ImWarning } from "react-icons/im";
 import { DELETE_PRODUCT } from "../../mutations/productMutations";
 import ReactLoading from "react-loading";
 import { IoMdOpen } from "react-icons/io";
+import { toast } from "react-toastify";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -46,11 +47,24 @@ const AdminDashboard = () => {
   }, [loading, data]);
 
   useEffect(() => {
-    if (!delLoading && delRequest) {
+    if (delData && delRequest) {
       handleOpenModal(false);
       setDelRequest(false);
       setProductID("");
+      toast.success('item deleted successfully', {
+        pauseOnFocusLoss: false,
+        position: toast.POSITION.TOP_RIGHT,
+      });
     }
+    if (delError) {
+      toast.error(delError.message, {
+        pauseOnFocusLoss: false,
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      localStorage.removeItem("token");
+      navigate("/login");
+    }
+    //eslint-disable-next-line
   }, [delLoading, delRequest]);
 
   const handlePageClick = (event) => {

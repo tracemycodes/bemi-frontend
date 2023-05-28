@@ -29,7 +29,7 @@ const ProductLayout = () => {
       {location.pathname.includes("admin") && (
         <div className="flex justify-between items-baseline">
           <button
-            className="flex items-center gap-2 border-2 border-border-blue px-2 mb-4"
+            className="flex items-center gap-2 bg-border-blue text-sm sm:text-base px-3 py-1 rounded shadow-md text-white mb-4"
             onClick={() => navigate("/admin/product")}
           >
             <FiArrowLeft className=" text-xl" />

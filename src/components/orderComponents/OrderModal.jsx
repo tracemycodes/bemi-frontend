@@ -4,17 +4,24 @@ import { IoMdClose } from "react-icons/io";
 import { useMutation } from "@apollo/client";
 import { UPDATE_ORDER } from "../../mutations/orderMutations";
 import ReactLoading from "react-loading";
+import { toast } from "react-toastify";
 
-export default function OrderModal({
-  handleOpenModal,
-  modal,
-  orderID,
-  orderData,
-}) {
+export default function OrderModal({ handleOpenModal, modal, orderData }) {
   const [updateOrder, { data, loading, error }] = useMutation(UPDATE_ORDER);
   const [open, setOpen] = useState(false);
-  const [urlCheck, setUrlCheck] = useState(false)
+  const [urlCheck, setUrlCheck] = useState(false);
   const [deliveryState, setDeliveryState] = useState({});
+  const [dataOrder, setDataOrder] = useState(null);
+
+  useEffect(() => {
+    console.log(error?.message);
+    if (error) {
+      toast.error(error.message, {
+        pauseOnFocusLoss: false,
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  }, [error]);
 
   useEffect(() => {
     setOpen(modal);
@@ -22,7 +29,16 @@ export default function OrderModal({
 
   useEffect(() => {
     setDeliveryState(orderData?.orderStatus);
+    setDataOrder(orderData);
   }, [orderData]);
+
+  useEffect(() => {
+    if (deliveryState?.shipped && deliveryState?.orderUrl === "") {
+      setUrlCheck(true);
+    } else {
+      setUrlCheck(false);
+    }
+  }, [deliveryState]);
 
   const cancelButtonRef = useRef(null);
 
@@ -30,8 +46,8 @@ export default function OrderModal({
     if (progress) {
       return;
     }
-    if (idx === 'shipped') {
-      setUrlCheck(true)
+    if (idx === "shipped") {
+      setUrlCheck(true);
     }
     setDeliveryState({
       ...deliveryState,
@@ -46,13 +62,19 @@ export default function OrderModal({
 
   const handleOrderUpdate = async () => {
     if (urlCheck) {
-      alert('Add order delivery URL')
-      return
+      alert("Add order delivery URL");
+      return;
     }
     try {
       const updateObj = {
-        status: deliveryState?.status,
-        orderUrl: deliveryState?.orderUrl ? deliveryState?.orderUrl : '',
+        status: deliveryState?.delivered.status
+          ? "delivered"
+          : deliveryState?.shipped.status
+          ? "shipped"
+          : deliveryState?.packed.status
+          ? "packed"
+          : "placed",
+        orderUrl: deliveryState?.orderUrl ? deliveryState?.orderUrl : "",
         placed: {
           orderDate: deliveryState?.placed?.orderDate
             ? deliveryState?.placed?.orderDate
@@ -80,7 +102,7 @@ export default function OrderModal({
       };
 
       await updateOrder({
-        variables: { orderStatus: updateObj, orderId: orderData._id },
+        variables: { orderStatus: updateObj, orderId: dataOrder._id },
       });
       handleOpenModal(false);
     } catch (err) {
@@ -138,12 +160,6 @@ export default function OrderModal({
                           onClick={() => handleOpenModal(false)}
                         />
                       </Dialog.Title>
-
-                      {/* <div className="pb-2 border border-red">
-                        <p className="text-sm text-text-para">
-                          
-                        </p>
-                      </div> */}
 
                       <div className="flex flex-wrap items-center gap-2 mt-7 pb-7">
                         <div className="border flex-auto border-border-blue"></div>

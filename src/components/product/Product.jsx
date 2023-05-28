@@ -147,6 +147,14 @@ const Product = () => {
         position: toast.POSITION.TOP_RIGHT,
       });
     }
+    if (productError) {
+      toast.error(productError.message, {
+        pauseOnFocusLoss: false,
+        position: toast.POSITION.TOP_RIGHT,
+      })
+      localStorage.removeItem('token')
+      navigate('/login')
+    }
     //eslint-disable-next-line
   }, [productData]);
 
@@ -156,6 +164,14 @@ const Product = () => {
         pauseOnFocusLoss: false,
         position: toast.POSITION.TOP_RIGHT,
       });
+    }
+    if (updateError) {
+      toast.error(updateError.message, {
+        pauseOnFocusLoss: false,
+        position: toast.POSITION.TOP_RIGHT,
+      })
+      localStorage.removeItem('token')
+      navigate('/login')
     }
     //eslint-disable-next-line
   }, [updateData]);

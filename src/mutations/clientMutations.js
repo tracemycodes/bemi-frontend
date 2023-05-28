@@ -20,6 +20,40 @@ const ADD_USER = gql`
   }
 `;
 
+const UPDATE_USER = gql`
+  mutation updateUser(
+    $firstName: String!
+    $lastName: String!
+    $address: String
+    $apartment: String
+    $city: String
+    $country: String
+    $state: String
+    $zipCode: String
+    $phone: String
+    $default: Boolean
+  ) {
+    updateUser(
+      addressInput: {
+        firstName: $firstName
+        lastName: $lastName
+        address: $address
+        apartment: $apartment
+        city: $city
+        country: $country
+        state: $state
+        zipCode: $zipCode
+        phone: $phone
+        default: $default
+      }
+    ) {
+      firstName
+      lastName
+      country
+    }
+  }
+`;
+
 const LOGIN_CLIENT = gql`
   mutation loginUser($email: String!, $password: String!) {
     loginUser(loginInput: { email: $email, password: $password }) {
@@ -46,4 +80,19 @@ const CHANGE_PASSWORD = gql`
   }
 `;
 
-export { LOGIN_CLIENT, ADD_USER, FORGOT_PASSWORD, CHANGE_PASSWORD };
+const DELETE_ADDRESS = gql`
+  mutation deleteAddress($addressId: String!) {
+    deleteAddress(addressId: $addressId) {
+      _id
+    }
+  }
+`;
+
+export {
+  LOGIN_CLIENT,
+  ADD_USER,
+  FORGOT_PASSWORD,
+  CHANGE_PASSWORD,
+  UPDATE_USER,
+  DELETE_ADDRESS,
+};

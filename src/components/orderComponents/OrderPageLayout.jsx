@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import OrderModal from "./OrderModal";
 import { useQuery } from "@apollo/client";
 import { ALL_ORDERS } from "../../queries/orderQuery";
+import { toast } from "react-toastify";
 
 const OrderPageLayout = () => {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ const OrderPageLayout = () => {
   const [tabState, setTabState] = useState(1);
   const [modal, setModal] = useState(false);
   const [orderList, setOrderList] = useState([]);
+  const [order, setOrder] = useState(null);
   const [dateObj, setDateObj] = useState({
     from: "",
     to: "",
@@ -25,28 +27,36 @@ const OrderPageLayout = () => {
 
   useEffect(() => {
     setOrderList(data?.orders);
-  }, [data]);
+    if (error) {
+      toast.error(error.message, {
+        pauseOnFocusLoss: false,
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  }, [data, error]);
 
-  const handleOpenModal = () => {
+  const handleOpenModal = (item) => {
+    setOrder(item);
     setModal(!modal);
   };
 
   const handleTab = (idx) => {
     setTabState(idx);
+    console.log(data.orders);
     if (idx === 1) {
       setOrderList(data.orders);
     } else if (idx === 2) {
       setOrderList(
-        data.orders.filter((order) => order.status.toLowerCase() === "packed")
+        data.orders.filter((order) => order.orderStatus.status.toLowerCase() === "packed")
       );
     } else if (idx === 3) {
       setOrderList(
-        data.orders.filter((order) => order.status.toLowerCase() === "shipped")
+        data.orders.filter((order) => order.orderStatus.status.toLowerCase() === "shipped")
       );
     } else if (idx === 4) {
       setOrderList(
         data.orders.filter(
-          (order) => order.status.toLowerCase() === "delivered"
+          (order) => order.orderStatus.status.toLowerCase() === "delivered"
         )
       );
     }
@@ -180,7 +190,9 @@ const OrderPageLayout = () => {
                         </td>
 
                         <td className="py-4 sm:py-5">
-                          <div className="rounded-sm text-sm sm:text-base">{order.email}</div>
+                          <div className="rounded-sm text-sm sm:text-base">
+                            {order.email}
+                          </div>
                         </td>
 
                         <td>
@@ -231,7 +243,7 @@ const OrderPageLayout = () => {
                         <td>
                           <div
                             className="flex items-center align-middle cursor-pointer"
-                            onClick={() => handleOpenModal(true, order._id)}
+                            onClick={() => handleOpenModal(order)}
                           >
                             <FiEdit color="#0B90E2" />
                           </div>
@@ -288,7 +300,12 @@ const OrderPageLayout = () => {
         </div>
       </div>
 
-      <OrderModal handleOpenModal={handleOpenModal} modal={modal} />
+      <OrderModal
+        handleOpenModal={handleOpenModal}
+        modal={modal}
+        orderId={order?._id}
+        orderData={order}
+      />
     </div>
   );
 };

@@ -63,13 +63,16 @@ const OrderComponents = () => {
                           />
                         </div>
                       </dt>
+                      
                       <dd className="mt-1 sm:text-sm text-xs text-gray-900 sm:col-span-2 sm:mt-0 flex flex-col flex-auto">
                         <h3 className="text-text-header">{item.name}</h3>
                         <p className="text-text-header">{item.color}</p>
                       </dd>
+
                       <dd className="mt-1 sm:text-sm text-xs text-text-header sm:col-span-2 sm:mt-0 self-center">
                         {item.price} × {item.count}
                       </dd>
+
                       <dd className="mt-1 sm:text-sm text-xs text-text-header sm:col-span-2 sm:mt-0 flex-none self-center">
                         {parseInt(item.price) * parseInt(item.count)}
                       </dd>

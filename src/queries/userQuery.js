@@ -18,4 +18,22 @@ const GET_USER = gql`
   }
 `;
 
-export { GET_USER };
+const GET_ADDRESS = gql`
+  query getAddress {
+    getAddress {
+      firstName
+      lastName
+      _id
+      apartment
+      city
+      country
+      state
+      address
+      zipCode
+      phone
+      default
+    }
+  }
+`;
+
+export { GET_USER, GET_ADDRESS };

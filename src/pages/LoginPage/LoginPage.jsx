@@ -60,11 +60,19 @@ const LoginPage = () => {
       });
       localStorage.setItem("token", data.loginUser.token);
       dispatch({ type: PROFILE_CHECK });
+      console.log(data, data.loginUser.isAdmin, 'trtrt');
+      if (data.loginUser.isAdmin) {
+        navigate('/admin')
+        return
+      }
       if (state.purchase) {
         navigate(-1);
       } else {
         navigate("/");
       }
+      
+      
+      
     }
     //eslint-disable-next-line
   }, [loading, data, error]);
