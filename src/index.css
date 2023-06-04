@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input[type="email"]:focus ~ .inputText {
+  @apply text-black transform -translate-y-10 -translate-x-2 scale-75;
+}

@@ -1,0 +1,42 @@
+.mySwip {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 0;
+}
+.swiper-button-next {
+  right: -0.15rem;
+  top: calc(50% - 1.7rem);
+  filter: invert(0%) sepia(100%) saturate(0%) hue-rotate(169deg) brightness(95%) contrast(100%);
+}
+.swiper-button-prev {
+  left: -0.15rem;
+  top: calc(50% - 1.7rem);
+  filter: invert(0%) sepia(100%) saturate(0%) hue-rotate(169deg) brightness(95%) contrast(100%);
+}
+
+@media (max-width: 700px) {
+  .mySwip {
+    width: 60% !important;
+  }
+}
+@media (max-width: 640px) {
+  .mySwip {
+    width: 70% !important;
+  }
+}
+@media (max-width: 560px) {
+  .mySwip {
+    width: 80% !important;
+  }
+}
+@media (max-width: 520px) {
+  .mySwip {
+    width: 90% !important;
+  }
+}
+@media (max-width: 420px) {
+  .mySwip {
+    width: 90% !important;
+  }
+}
