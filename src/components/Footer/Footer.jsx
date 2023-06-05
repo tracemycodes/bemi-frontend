@@ -37,7 +37,7 @@ const Footer = () => {
     <footer className="bg-black px-5 md:px-20 pt-10 pb-10">
       <section className="w-full border-2 border-red-900 grid lg:grid-cols-4 md:grid-cols-2 md:gap-y-4">
         {/* service and security */}
-        <section className="p-2.5 text-white w-full text-xs">
+        <section className="py-2.5 text-white w-full text-xs">
           <div
             className="mb-4 flex justify-between items-center "
             onClick={() => setClick(1)}
@@ -75,7 +75,7 @@ const Footer = () => {
         </section>
 
         {/* Shop */}
-        <section className="p-2.5 text-white w-full text-xs">
+        <section className="py-2.5 text-white w-full text-xs">
           <div
             className="mb-4 flex justify-between items-center"
             onClick={() => setClick(2)}
@@ -104,7 +104,7 @@ const Footer = () => {
         </section>
 
         {/* About us */}
-        <section className="p-2.5 text-white w-full text-xs">
+        <section className="py-2.5 text-white w-full text-xs">
           <div
             className="mb-4 flex justify-between items-center"
             onClick={() => setClick(3)}
@@ -126,7 +126,7 @@ const Footer = () => {
         </section>
 
         {/* Join Needle & Thread */}
-        <section className="p-2.5 text-white w-full text-xs">
+        <section className="py-2.5 text-white w-full text-xs">
           <div className="mb-4">
             <h3 className="text-sm text-darkgray">JOIN BEMI IVORY</h3>
           </div>
