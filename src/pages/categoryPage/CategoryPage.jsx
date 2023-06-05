@@ -65,6 +65,7 @@ const CategoryPage = () => {
           <div className="category-sort">
             <div className="sort-header">
               <button className="filter-btn">filter</button>
+
               <div className="sort-div">
                 <div className="sort-cta" onClick={handleSort}>
                   <p>Sort:</p>
@@ -100,8 +101,10 @@ const CategoryPage = () => {
                   </div>
                 )}
               </div>
+
               <button className="sort-btn">sort</button>
             </div>
+            
             <div className="category-grid">
               {ProductData &&
                 ProductData.map((product, index) => (
