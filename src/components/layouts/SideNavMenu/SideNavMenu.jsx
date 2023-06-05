@@ -76,7 +76,7 @@ const SideNavMenu = () => {
             <ul className="text-navlink text-xs">
               <li className="navLinkItem">
                 <NavLink
-                  to="all-products"
+                  to="category"
                   className="flex flex-row justify-between items-center text-center py-3"
                 >
                   ALL PRODUCTS
@@ -85,7 +85,7 @@ const SideNavMenu = () => {
               </li>
               <li className="navLinkItem">
                 <NavLink
-                  to="new-in"
+                  to="category"
                   className="flex flex-row justify-between items-center text-center py-4"
                 >
                   NEW IN
@@ -94,7 +94,7 @@ const SideNavMenu = () => {
               </li>
               <li className="navLinkItem">
                 <NavLink
-                  to="signature-collection"
+                  to="category"
                   className="flex flex-row justify-between items-center text-center py-4"
                 >
                   SIGNATURE COLLECTION
@@ -103,7 +103,7 @@ const SideNavMenu = () => {
               </li>
               <li className="navLinkItem">
                 <NavLink
-                  to="kids"
+                  to="category"
                   className="flex flex-row justify-between items-center text-center py-4"
                 >
                   KIDS
@@ -112,7 +112,7 @@ const SideNavMenu = () => {
               </li>
               <li className="navLinkItem">
                 <NavLink
-                  to="best-sellers"
+                  to="category"
                   className="flex flex-row justify-between items-center text-center py-4"
                 >
                   BEST SELLERS
