@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const SliderDiv = styled.div`
   height: 35rem;
-  border: 2px solid black;
+  // border: 2px solid black;
 `;
 
 export const SliderSection = styled.section`
@@ -11,11 +11,14 @@ export const SliderSection = styled.section`
   margin: 1rem auto;
   border-top: 0.7px solid black;
   border-bottom: 0.7px solid black;
-  padding: 1rem 0;
+  padding: 1.5rem 0;
   @media (min-width: 700px) {
     width: 100%;
   }
   @media (max-width: 1330px) {
+    padding: 1rem 1.25rem;
+  }
+  @media (max-width: 570px) {
     padding: 1rem 1.25rem;
   }
   .slider-header {

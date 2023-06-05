@@ -21,7 +21,7 @@ module.exports = {
       transparent: "FFFFFF00",
       inherit: "inherit",
       lightgray: "#00000035",
-      lightash: "#f8f8f8",
+      lightash: "#f0f0f0",
       navlink: "#e5dfd9",
     },
     fontFamily: {

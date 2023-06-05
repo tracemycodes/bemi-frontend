@@ -6,7 +6,6 @@ import {
   FiTwitter,
   FiYoutube,
   FiSearch,
-  FiUser,
   FiMenu,
   FiHeart,
 } from "react-icons/fi";
@@ -51,9 +50,9 @@ function Navbar() {
     <BemiNav>
       <header
         className={`px-4 text-darkgray text-xl fixed top-0 left-0 lg:relative ${
-          navBar && "bg-black"
+          navBar && "bg-black nav-active"
         } w-full flex flex-row items-center justify-between lg:px-6 pb-1 pt-2 ${
-          state.navBarShed && "bg-black"
+          state.navBarShed && "bg-black nav-active"
         }`}
       >
         <FiMenu
@@ -61,6 +60,7 @@ function Navbar() {
           className="cursor-pointer lg:hidden"
           onClick={() => dispatch({ type: "TOGGLE_NAVBAR" })}
         />
+
         <div
           className={
             navBar
@@ -101,6 +101,7 @@ function Navbar() {
             <FiYoutube />
           </a>
         </div>
+
         <Link
           to={"/"}
           onClick={() => dispatch({ type: "NAVBAR_SHED", payload: false })}
@@ -109,15 +110,9 @@ function Navbar() {
             <img src={bemiLogo} alt="logo" srcSet="" />
           </div>
         </Link>
-        <div className="flex text-center text-lg gap-x-2 ">
-          {/* <Link
-            to={"/login"}
-            onClick={() => dispatch({ type: "NAVBAR_SHED", payload: true })}
-          >
-            <FiUser />
-          </Link> */}
 
-          <DropDown/>
+        <div className="flex text-center text-lg gap-x-2 ">
+          <DropDown />
           <FiHeart />
 
           <div className="shop-cart">
@@ -183,7 +178,7 @@ function Navbar() {
           </a>
         </div>
 
-        <ul className="w-6/12  m-auto flex flex-row justify-between text-navlink text-xs font-bold items-center text-center lg:w-7/12 xl:w-6/12">
+        <ul className="w-6/12 m-auto flex flex-row justify-between text-navlink text-xs font-bold items-center text-center lg:w-7/12 xl:w-6/12">
           <li className="">
             <NavLink
               to="category"
@@ -259,14 +254,7 @@ function Navbar() {
             navBar ? "hidden lg:flex text-center text-lg gap-x-2" : "hidden"
           }
         >
-          {/* <Link
-            to={"/login"}
-            onClick={() => dispatch({ type: "NAVBAR_SHED", payload: true })}
-          >
-            <FiUser />
-          </Link> */}
-
-          <DropDown/>
+          <DropDown />
 
           <FiHeart />
 

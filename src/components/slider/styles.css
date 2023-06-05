@@ -3,6 +3,7 @@
   height: 100%;
   position: relative;
   z-index: 0;
+  margin: unset;
 }
 .swiper-button-next {
   right: -0.15rem;
@@ -27,16 +28,16 @@
 }
 @media (max-width: 560px) {
   .mySwip {
-    width: 80% !important;
+    width: 100% !important;
   }
 }
 @media (max-width: 520px) {
   .mySwip {
-    width: 90% !important;
+    width: 100% !important;
   }
 }
 @media (max-width: 420px) {
   .mySwip {
-    width: 90% !important;
+    width: 100% !important;
   }
 }

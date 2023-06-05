@@ -7,9 +7,7 @@ import { FiUser } from "react-icons/fi";
 import BemiIvoryContext from "../../../context/BemiIvory/bemiIvoryContext";
 import { PROFILE_CHECK } from "../../../context/types";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+
 
 export default function DropDown() {
   const navigate = useNavigate();
@@ -21,7 +19,6 @@ export default function DropDown() {
 
   useEffect(() => {
     setUserToken(localStorage.token);
-    console.log(state.profile);
   }, [state.profile]);
 
   const handleLogout = () => {
@@ -37,7 +34,6 @@ export default function DropDown() {
     >
       <div>
         <Menu.Button className="">
-          {/* <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"> */}
           <FiUser />
         </Menu.Button>
       </div>
@@ -51,8 +47,8 @@ export default function DropDown() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 top-0 z-10 mt-8 w-36 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="p-3 flex flex-col gap-2">
+        <Menu.Items className="absolute right-0 top-0 z-10 mt-8 w-24 sm:w-36 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <div className="p-2 sm:p-3 flex flex-col gap-2">
             {userToken ? (
               <>
                 <Menu.Item>
@@ -83,7 +79,7 @@ export default function DropDown() {
                 {({ active }) => (
                   <Link
                     to={"/login"}
-                    className="flex items-center text-black gap-3 text-base"
+                    className="flex items-center text-black gap-3 text-sm sm:text-base"
                   >
                     <BiLogIn /> Login
                   </Link>

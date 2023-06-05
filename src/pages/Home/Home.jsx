@@ -19,9 +19,12 @@ function Home() {
   useEffect(() => {
     const getClient = async () => {
       try {
-        const res = await fetch("http://localhost:8000/auth/login/success", {
-          method: "GET",
-        });
+        const res = await fetch(
+          `${"https://localhost:3000"}/auth/login/success`,
+          {
+            method: "GET",
+          }
+        );
 
         console.log(res);
       } catch (err) {
@@ -43,8 +46,8 @@ function Home() {
 
   return (
     <div>
-      <div className="home">
-        <img src={Boutique} alt="" />
+      <div className="home object-cover h-[42rem] w-full">
+        <img src={Boutique} alt="hero" className="w-full h-full object-cover" />
       </div>
       <BrandBanner />
       <Slider ProductData={sliderData.one} />

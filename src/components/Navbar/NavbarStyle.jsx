@@ -4,16 +4,23 @@ export const BemiNav = styled.div`
   position: relative;
   z-index: 99;
   background: linear-gradient(to bottom, #25211e 0, rgba(37, 33, 30, 0.2) 100%);
-  // border: 2px solid red;
-  // padding: 14px 0;
-  // background: transparent;
-  // background: black;
+  
+  header {
+    
+    @media (max-width: 1028px) {
+      background: linear-gradient(to bottom, rgba(37, 33, 30, 1) 0, rgba(37, 33, 30, .8) 100%);
+    }
+  }
+
+  .nav-active {
+    background: black;
+  }
 
   .shop-cart {
     position: relative;
     .cart-num {
       position: absolute;
-      bottom: -40%;
+      bottom: 0;
       left: -40%;
       width: 100%;
       display: flex;

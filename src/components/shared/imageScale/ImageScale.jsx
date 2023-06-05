@@ -4,7 +4,7 @@ const Image = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 2s ease-in;
+  transition: transform .5s ease-in;
   cursor: pointer;
   &:hover {
     transform: scale(1.1);
@@ -13,6 +13,7 @@ const Image = styled.img`
 const Figure = styled.figure`
   height: ${(props) => (props.height ? props.height : "500px")};
   overflow: hidden;
+  padding: 0;
   @media (max-width: 1200px) {
     height: 360px;
   }
