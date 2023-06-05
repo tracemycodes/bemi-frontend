@@ -36,42 +36,9 @@ const ProductThumbnail = ({ product }) => {
         {images &&
           images.map((item) => (
             <SwiperSlide>
-              <img
-                src={item}
-                alt="slide"
-              />
+              <img src={item} alt="slide" />
             </SwiperSlide>
           ))}
-        {/* <SwiperSlide>
-          <img
-            src="https://swiperjs.com/demos/images/nature-1.jpg"
-            alt="slide"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src="https://swiperjs.com/demos/images/nature-2.jpg"
-            alt="slide"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src="https://swiperjs.com/demos/images/nature-3.jpg"
-            alt="slide"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src="https://swiperjs.com/demos/images/nature-4.jpg"
-            alt="slide"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src="https://swiperjs.com/demos/images/nature-5.jpg"
-            alt="slide"
-          />
-        </SwiperSlide> */}
       </Swiper>
       <Swiper
         onSwiper={setThumbsSwiper}
@@ -86,42 +53,9 @@ const ProductThumbnail = ({ product }) => {
         {images &&
           images.map((item) => (
             <SwiperSlide>
-              <img
-                src={item}
-                alt="slide"
-              />
+              <img src={item} alt="slide" />
             </SwiperSlide>
           ))}
-        {/* <SwiperSlide>
-          <img
-            src="https://swiperjs.com/demos/images/nature-1.jpg"
-            alt="slide"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src="https://swiperjs.com/demos/images/nature-2.jpg"
-            alt="slide"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src="https://swiperjs.com/demos/images/nature-3.jpg"
-            alt="slide"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src="https://swiperjs.com/demos/images/nature-4.jpg"
-            alt="slide"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src="https://swiperjs.com/demos/images/nature-5.jpg"
-            alt="slide"
-          />
-        </SwiperSlide> */}
       </Swiper>
     </>
   );

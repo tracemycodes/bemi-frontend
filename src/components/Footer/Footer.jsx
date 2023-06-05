@@ -130,7 +130,7 @@ const Footer = () => {
           <div className="mb-4">
             <h3 className="text-sm text-darkgray">JOIN BEMI IVORY</h3>
           </div>
-          <form className="flex mb-2.5">
+          <form className="flex my-4">
             <input
               type="email"
               className="p-2 focus:outline-none focus:border-2 bg-inherit border-2 border-white w-3/4"
@@ -139,11 +139,18 @@ const Footer = () => {
               subscribe
             </button>
           </form>
-          <input type="checkbox" id="terms" name="terms" />
-          <label htmlFor="terms" className="pl-2.5 text-xs">
-            By signing up you agree to receive marketing material from Bemi
-            Ivory
-          </label>
+          <div className="flex">
+            <input
+              type="checkbox"
+              id="terms"
+              name="terms"
+              className=" inline-block"
+            />
+            <label htmlFor="terms" className="pl-2.5 text-xs inline-block">
+              By signing up you agree to receive marketing material from Bemi
+              Ivory
+            </label>
+          </div>
           <div className="md:mt-2.5 mt-10 ">
             <h3 className="text-sm">Follow Us On</h3>
           </div>

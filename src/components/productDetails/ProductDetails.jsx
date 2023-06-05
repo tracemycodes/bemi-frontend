@@ -93,7 +93,7 @@ const ProductDetails = ({ product, isAdmin }) => {
   return (
     <DetailsSection>
       <h2 className="poduct-name">{product?.name}</h2>
-      <p className="product-price">
+      <p className="product-price text-base">
         ${product?.price && product?.price.toLocaleString(`en-US`)}
       </p>
       <hr />
@@ -136,7 +136,7 @@ const ProductDetails = ({ product, isAdmin }) => {
       </div>
       {!isAdmin && (
         <div className="product-quantity">
-          <h3>Quantity</h3>
+          <h3 className=" font-bold">Quantity</h3>
           <div className="product-qun-btn">
             <button onClick={() => handleCount("-")}>-</button>
             <p>{productCount}</p>
