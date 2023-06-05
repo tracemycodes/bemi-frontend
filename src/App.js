@@ -31,6 +31,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import ChangePassword from "./pages/ChangePassword/ChangePassword";
+import CategorySection from "./pages/CategorySection/CategorySection";
+// import { CategorySection } from "./pages/categoryPage/categoryStyle";
 
 const httpLink = new HttpLink({ uri: "https://good-rose-coral-fez.cyclic.app/graphql" });
 
@@ -65,7 +67,8 @@ const App = () => {
               <Route path="change-password/:passId" element={<ChangePassword />} />
               <Route path="signup" element={<SignUp />} />
               <Route path="product/:cloth" element={<ViewProduct />} />
-              <Route path="category" element={<CategoryPage />} />
+              <Route path="category" element={<CategorySection />} />
+              {/* <Route path="category" element={<CategoryPage />} /> */}
               <Route path="nav" element={<SideNavMenu />} />
               <Route path="account" element={<Account />} />
               <Route path="account/address" element={<AccountForm />} />

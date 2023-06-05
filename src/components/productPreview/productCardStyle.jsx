@@ -38,6 +38,14 @@ export const ProductDiv = styled.div`
     margin: 1rem 0 0.2rem;
     font-size: 1.1rem;
     font-weight: 300;
+    @media (max-width: 515px) {
+      font-size: 0.9rem;
+    }
+  }
+  .product-price {
+    @media (max-width: 515px) {
+      font-size: 0.75rem;
+    }
   }
   .product-view {
     position: absolute;
@@ -62,6 +70,10 @@ export const ProductDiv = styled.div`
       border: 1.5px solid black;
       display: inline-block;
       border-radius: 50%;
+      @media (max-width: 515px) {
+        width: 0.7rem;
+        height: 0.7rem;
+      }
     }
     > * + * {
       margin-left: 0.2rem;

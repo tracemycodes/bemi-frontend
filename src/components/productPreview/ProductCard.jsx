@@ -25,9 +25,9 @@ const ProductCard = ({ width, height, product }) => {
           <Link to={`/product/${product.name}`}>Quick View</Link>
         </ViewBtn>
       </div>
-      <h4 className="product-name">{product.name}</h4>
-      <p className="product-price">{product.price}</p>
-      <div className="product-shed">
+      <h4 className="product-name truncate">{product.name}</h4>
+      <div className="product-shed flex">
+        <p className="product-price mr-auto">{product.price}</p>
         {product &&
           product.color.map((shed, index) => (
             <span
