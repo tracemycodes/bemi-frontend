@@ -19,6 +19,11 @@ const ProductDetails = ({ product, isAdmin }) => {
   const [storage, setStorage] = useLocalStorage("ivoryStore", []);
 
   useEffect(() => {
+    dispatch({ type: "UPDATE_COUNT", payload: storage.length });
+    //eslint-disable-next-line
+  }, [storage])
+
+  useEffect(() => {
     if (Object.keys(product)?.length > 0) {
       setProductColor(product.color[0].color);
       setProductSize(product.size[0]);
@@ -87,7 +92,7 @@ const ProductDetails = ({ product, isAdmin }) => {
     } else {
       setStorage([...storage, cloth]);
     }
-    dispatch({ type: "UPDATE_COUNT", payload: storage.length });
+    
   };
 
   return (

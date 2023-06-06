@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Button from "../../shared/Button/button";
 import RightSideBar from "../../shared/RightSideBar/rightSideBar";
 import { BemiBag } from "./productCartStyle";
@@ -9,8 +9,11 @@ import useLocalStorage from "../../../hooks/useLocalStorage";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_ORDER } from "../../../mutations/orderMutations";
+import BemiIvoryContext from "../../../context/BemiIvory/bemiIvoryContext";
 
 function ProductCart() {
+  const bemiIvoryContext = useContext(BemiIvoryContext);
+  const { dispatch } = bemiIvoryContext;
   const navigate = useNavigate();
   const [showNote, setShowNote] = useState(true);
 
@@ -21,7 +24,12 @@ function ProductCart() {
       products: storage,
     },
   });
-  
+
+  useEffect(() => {
+    dispatch({ type: "UPDATE_COUNT", payload: storage.length });
+    //eslint-disable-next-line
+  }, [storage]);
+
   const handleCount = (check, dress) => {
     let { name, count, stock } = dress;
 
@@ -50,6 +58,10 @@ function ProductCart() {
     }
   };
 
+  const handleRemove = (item) => {
+    setStorage(storage.filter((idx) => idx.name !== item.name));
+  };
+
   useEffect(() => {
     if (data) {
       navigate(`/checkout/${data.addOrder._id}`);
@@ -59,7 +71,7 @@ function ProductCart() {
 
   const handleCheckOut = () => {
     console.log("object");
-    addOrder([storage])
+    addOrder([storage]);
   };
 
   return (
@@ -67,7 +79,6 @@ function ProductCart() {
       <RightSideBar title={"Your cart"}>
         <div
           className={"cartContainer"}
-          style={{ height: showNote ? "200px" : "320px" }}
         >
           {storage.length > 0 &&
             storage.map((item, index) => (
@@ -75,6 +86,7 @@ function ProductCart() {
                 key={item + index}
                 product={item}
                 handleCount={handleCount}
+                handleRemove={() => handleRemove(item)}
               />
             ))}
         </div>

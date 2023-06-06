@@ -23,6 +23,7 @@ function Navbar() {
 
   const [navBar, setNavbar] = useState(false);
   const [storage, setStorage] = useLocalStorage("ivoryStore", []);
+  const [cartItems, setCartItems] = useState(0);
 
   useEffect(() => {
     changeBackground();
@@ -30,6 +31,10 @@ function Navbar() {
 
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    setCartItems(state.cartBag);
+  }, [state.cartBag]);
 
   const changeBackground = () => {
     if (window.scrollY >= 20) {
@@ -118,9 +123,9 @@ function Navbar() {
           <div className="shop-cart">
             <BiShoppingBag onClick={() => dispatch({ type: "TOGGLE_CART" })} />
             <div className="cart-num">
-              {state.cartBag > 0 && (
+              {cartItems > 0 && (
                 <span onClick={() => dispatch({ type: "TOGGLE_CART" })}>
-                  {state.cartBag}
+                  {cartItems}
                 </span>
               )}
             </div>

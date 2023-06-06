@@ -5,7 +5,6 @@ export const BemiBag = styled.div`
   .cartContainer {
     margin-top: 1rem;
     border-top: 2px solid black;
-    height: 320px;
     border-bottom: 2px solid black;
     overflow-y: auto;
     position: relative;

@@ -23,7 +23,7 @@ const RightSideBar = ({
             <div className="rightSideBar-Header">
               <h3 className="profileDetailsHeader-title">{title}</h3>
               <FaTimes
-                className="faTimesCancel"
+                className="faTimesCancel text-2xl"
                 onClick={() => dispatch({type: "TOGGLE_CART"})}
               />
             </div>
