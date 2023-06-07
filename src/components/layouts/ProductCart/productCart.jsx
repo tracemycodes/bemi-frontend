@@ -71,6 +71,7 @@ function ProductCart() {
 
   const handleCheckOut = () => {
     addOrder([storage]);
+    dispatch({ type: "TOGGLE_CART" })
   };
 
   return (

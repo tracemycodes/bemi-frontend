@@ -41,7 +41,7 @@ const ProductLayout = () => {
           </button>
         </div>
       )}
-      <div className="flex justify-between">
+      <div className="flex sm:flex-row flex-col justify-between">
         <div className="max-w-[28rem] max-h-[39rem]">
           <ProductThumbnail product={productData} />
         </div>

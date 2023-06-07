@@ -34,14 +34,14 @@ const OrderComponents = () => {
 
   return (
     <div>
-      <div className="flex gap-6 flex-col lg:flex-row">
+      <div className="flex sm:gap-6 flex-col lg:flex-row">
         <div className="lg:flex-auto lg:w-[80rem] min-h-[32rem] relative ...">
           <div className="overflow-hidden h-full flex flex-col px-5 py-1 bg-white shadow-md sm:rounded-lg">
             <div className="py-4 flex gap-6">
-              <h3 className="text-lg font-medium leading-6 text-text-header">
+              <h3 className="sm:text-lg text-md font-medium leading-6 text-text-header">
                 Ordered Items
               </h3>
-              <p className="mt-1 max-w-2xl text-sm text-text-para">
+              <p className="mt-1 max-w-2xl sm:text-sm text-xs text-text-para">
                 list of purchased items.
               </p>
             </div>
@@ -50,9 +50,12 @@ const OrderComponents = () => {
               <dl>
                 {data &&
                   data?.singleOrder?.products.map((item) => (
-                    <div className="bg-gray-50 py-4 flex gap-6" key={item._id}>
+                    <div
+                      className="bg-gray-50 sm:py-4 py-3 flex sm:gap-6 gap-3"
+                      key={item._id}
+                    >
                       <dt className="text-sm font-medium text-gray-500 flex-none">
-                        <div className="w-14 h-16 object-cover">
+                        <div className="sm:w-14 w-12 sm:h-16 h-14 object-cover">
                           <img
                             src={item.image}
                             alt=""
@@ -60,15 +63,14 @@ const OrderComponents = () => {
                           />
                         </div>
                       </dt>
-                      <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 flex flex-col flex-auto">
+                      <dd className="mt-1 sm:text-sm text-xs text-gray-900 sm:col-span-2 sm:mt-0 flex flex-col flex-auto">
                         <h3 className="text-text-header">{item.name}</h3>
                         <p className="text-text-header">{item.color}</p>
-                        <p className="mt-auto text-text-para">Item Id: </p>
                       </dd>
-                      <dd className="mt-1 text-sm text-text-header sm:col-span-2 sm:mt-0 self-center">
+                      <dd className="mt-1 sm:text-sm text-xs text-text-header sm:col-span-2 sm:mt-0 self-center">
                         {item.price} × {item.count}
                       </dd>
-                      <dd className="mt-1 text-sm text-text-header sm:col-span-2 sm:mt-0 flex-none self-center">
+                      <dd className="mt-1 sm:text-sm text-xs text-text-header sm:col-span-2 sm:mt-0 flex-none self-center">
                         {parseInt(item.price) * parseInt(item.count)}
                       </dd>
                     </div>
@@ -77,16 +79,20 @@ const OrderComponents = () => {
             </div>
 
             <div className="mt-auto mb-4 border-t pt-3 border-[#BEBEC6] flex gap-4">
-              <dt className="text-sm font-medium text-text-header flex-none">
-                Order note
-              </dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 flex flex-col flex-auto">
-                <p className="text-text-para text-xs max-w-[16rem]">
-                  Ship all the ordered items together by friday and I send you
-                  an email please check. Thanks!
-                </p>
-              </dd>
-              <dd className="mt-1 text-sm text-text-header sm:col-span-2 sm:mt-0 flex flex-col gap-2 flex-none self-center">
+              <div className="sm:flex">
+                <dt className="text-sm font-medium text-text-header flex-none">
+                  Order note
+                </dt>
+
+                <dd className="mt-1 sm:text-sm text-xs text-gray-900 sm:col-span-2 sm:mt-0 flex flex-col flex-auto">
+                  <p className="text-text-para text-xs max-w-[16rem]">
+                    Ship all the ordered items together by friday and I send you
+                    an email please check. Thanks!
+                  </p>
+                </dd>
+              </div>
+
+              <dd className="mt-1 sm:text-sm text-xs text-text-header sm:col-span-2 sm:mt-0 flex flex-col gap-2 flex-none self-center">
                 <div className="flex justify-between gap-12">
                   <p>Subtotal</p>
                   <p>
@@ -121,15 +127,15 @@ const OrderComponents = () => {
           </div>
         </div>
 
-        <div class="flex-auto lg:w-[20rem] flex flex-col bg-white lg:min-h-[32rem] px-5 lg:py-1 py-4 shadow-md sm:rounded-lg relative ...">
-          <div className="py-4 flex gap-6 border-b border-[#BEBEC6] border-opacity-60">
-            <h3 className="text-lg font-medium mt-1 leading-6 text-text-header">
+        <div class="flex-auto lg:w-[20rem] flex flex-col bg-white lg:min-h-[32rem] sm:px-5 px-3 lg:py-1 sm:py-4 py-2 shadow-md sm:rounded-lg relative ...">
+          <div className="sm:py-4 py-2 flex gap-6 border-b border-[#BEBEC6] border-opacity-60">
+            <h3 className="sm:text-lg text-base font-medium sm:mt-1 leading-6 text-text-header">
               Order History
             </h3>
           </div>
 
           <div className="flex lg:flex-col my-4 lg:my-0 align-top lg:justify-start justify-around">
-            <div className="flex gap-4 mt-8 mb-8 lg:mb-2">
+            <div className="flex flex-col sm:flex-row gap-10 sm:gap-6 mt-8 mb-8 lg:mb-2">
               <div
                 className={`flex align-middle justify-center border w-10 rounded-full ${
                   data?.singleOrder?.orderStatus?.status === "placed"
@@ -168,7 +174,7 @@ const OrderComponents = () => {
               </div>
             </div>
 
-            <div className="flex gap-4 mt-8 mb-8 lg:mb-2">
+            <div className="flex flex-col sm:flex-row gap-10 sm:gap-6 mt-8 mb-8 lg:mb-2">
               <div
                 className={`flex align-middle justify-center border w-10 rounded-full ${
                   data?.singleOrder?.orderStatus?.packed?.status === true
@@ -211,7 +217,7 @@ const OrderComponents = () => {
               </div>
             </div>
 
-            <div className="flex gap-4 mt-8 mb-8 lg:mb-2">
+            <div className="flex flex-col sm:flex-row gap-10 sm:gap-6 mt-8 mb-8 lg:mb-2">
               <div
                 className={`flex align-middle justify-center border w-10 rounded-full ${
                   data?.singleOrder?.orderStatus?.shipped?.status === true
@@ -267,7 +273,7 @@ const OrderComponents = () => {
               </div>
             </div>
 
-            <div className="flex gap-4 mt-8 mb-8 lg:mb-2">
+            <div className="flex flex-col sm:flex-row gap-10 sm:gap-6 mt-8 mb-8 lg:mb-2">
               <div
                 className={`flex align-middle justify-center border w-10 rounded-full ${
                   data?.singleOrder?.orderStatus?.delivered?.status === true
@@ -321,65 +327,68 @@ const OrderComponents = () => {
           </div>
 
           <button
-            className="mt-auto mb-4 bg-border-blue py-2 text-white rounded w-full"
+            className="mt-auto mb-4 bg-border-blue py-2 text-white shadow-md rounded w-full"
             onClick={handleOpenModal}
           >
-            Update status
+            Update
           </button>
         </div>
       </div>
 
       <div className="flex flex-col lg:flex-row gap-6 mt-8">
         <div className="flex-auto lg:w-[80rem] relative h-full flex flex-col px-5 py-1 bg-white shadow-md sm:rounded-lg ...">
-          <div className="py-4 flex gap-6">
-            <h3 className="text-lg font-medium leading-6 text-text-header">
+          <div className="sm:py-4 py-3 flex gap-6">
+            <h3 className="sm:text-lg text-md font-medium leading-6 text-text-header">
               Shipping Details
             </h3>
           </div>
+
           <div className="border-t flex gap-2 border-text-para border-opacity-60 py-6">
-            <div className="flex flex-col gap-4 flex-auto">
+            <div className="flex flex-col sm:gap-4 gap-3 flex-auto">
               <div className="flex gap-2 items-center">
                 <FaUser />
-                <p className=" text-text-header text-sm">Olivia Parker</p>
+                <p className=" text-text-header text-xs sm:text-sm">Olivia Parker</p>
               </div>
+
               <div className="flex gap-2 items-center">
                 <HiMail />
-                <p className=" text-text-header text-sm">Olivia Parker</p>
+                <p className=" text-text-header text-xs sm:text-sm">Olivia Parker</p>
               </div>
+
               <div className="flex gap-2 items-center">
                 <BsFillTelephoneFill />
-                <p className=" text-text-header text-sm">+1 212 8772900</p>
+                <p className=" text-text-header text-xs sm:text-sm">+1 212 8772900</p>
               </div>
             </div>
 
-            <div className="flex flex-col gap-4 flex-auto">
+            <div className="flex flex-col sm:gap-4 gap-3 flex-auto">
               <div className="flex gap-2 items-center">
-                <p className=" text-text-header text-sm">
+                <p className=" text-text-header text-xs sm:text-sm">
                   United States, San Francisco
                 </p>
               </div>
               <div className="flex gap-2 items-center">
-                <p className=" text-text-header text-sm">
+                <p className=" text-text-header text-xs sm:text-sm">
                   490 Post St, Suite 900, San Francisco, CA
                 </p>
               </div>
               <div className="flex gap-2 items-center">
-                <p className=" text-text-header text-sm">94762</p>
+                <p className=" text-text-header text-xs sm:text-sm">94762</p>
               </div>
             </div>
           </div>
         </div>
 
         <div class="flex-auto lg:w-[20rem] flex flex-col bg-white px-5 py-1 shadow-md sm:rounded-lg relative ...">
-          <div className="py-4 flex gap-6">
-            <h3 className="text-lg font-medium leading-6 text-text-header">
-              Shipping Details
+          <div className="sm:py-4 py-3 flex sm:gap-6 gap-3">
+            <h3 className="sm:text-lg text-md font-medium leading-6 text-text-header">
+              Delivery Details
             </h3>
           </div>
 
           <div className="border-t flex gap-2 border-text-para border-opacity-60 py-6">
-            <div className="object-cover w-24 mx-auto text-black text-left text-sm">
-              {data?.singleOrder?.orderStatus.orderUrl !== '' ? (
+            <div className="object-cover w-24 mx-auto text-black text-left sm:text-sm text-xs">
+              {data?.singleOrder?.orderStatus.orderUrl !== "" ? (
                 data?.singleOrder?.orderStatus.orderUrl
               ) : (
                 <img src={errorIcon} alt="" />
@@ -388,6 +397,7 @@ const OrderComponents = () => {
           </div>
         </div>
       </div>
+
       <OrderModal
         handleOpenModal={handleOpenModal}
         modal={modal}

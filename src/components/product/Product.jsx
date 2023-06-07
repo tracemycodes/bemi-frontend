@@ -209,6 +209,7 @@ const Product = () => {
     e.preventDefault();
     setClothSize(e.target.value);
   };
+
   const handleSizeClick = (e) => {
     e.preventDefault();
     if (clothSize === "" || clothSize === " ") {
@@ -221,6 +222,7 @@ const Product = () => {
     });
     setClothSize("");
   };
+
   const handleDeleteSize = (size) => {
     setProductState({
       ...productState,
@@ -232,6 +234,7 @@ const Product = () => {
   const handleColorChange = (e) => {
     setProductShed({ ...productShed, [e.target.name]: e.target.value });
   };
+
   const handleAddColor = (e) => {
     e.preventDefault();
     if (productShed.color === "" || productShed.shed === "") {
@@ -247,6 +250,7 @@ const Product = () => {
       shed: "",
     });
   };
+
   const handleDeleteShed = (index) => {
     setProductState({
       ...productState,
@@ -258,9 +262,11 @@ const Product = () => {
   const handleEditorChange = ({ html, text }) => {
     setMarkDownText({ ...markDownText, html: html });
   };
+
   const handleMarkDownSelect = (field) => {
     setMarkDownText({ ...markDownText, text: field });
   };
+
   const handleSaveMarkDown = (e) => {
     e.preventDefault();
     if (markDownText.html === "" || markDownText.html === "") {
@@ -272,6 +278,7 @@ const Product = () => {
     setProductState({ ...productState, [textBtn]: field });
     setMarkDownText({ text: "", html: "" });
   };
+
   const handleCloseMarkDown = () => {
     setMarkDownText({ text: "", html: "" });
   };
@@ -304,12 +311,14 @@ const Product = () => {
     });
     // eslint-disable-next-line
   }, []);
+
   const handleImgDelete = (index) => {
     setProductState({
       ...productState,
       images: [...productState.images].filter((item, count) => count !== index),
     });
   };
+
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   const [variantImg, setVariantImg] = useState({
@@ -333,6 +342,7 @@ const Product = () => {
       };
     }
   };
+
   const handleAddVariant = (e, shed) => {
     e.preventDefault();
     const currentShed = productState.variant.find(
@@ -360,6 +370,7 @@ const Product = () => {
       images: [],
     });
   };
+
   const handleDeleteVariant = (productColor, index) => {
     const currentShed = productState.variant.find(
       (variant) => variant.color === productColor
@@ -377,17 +388,17 @@ const Product = () => {
       <ToastContainer />
       <div className="mb-6">
         <button
-          className="flex items-center gap-2 border-2 border-border-blue px-2"
+          className="flex items-center gap-2 rounded shadow-md text-white py-1 bg-border-blue px-3"
           onClick={() => navigate("/admin/product")}
         >
-          <FiArrowLeft className=" text-xl" />
-          <p className="">back</p>
+          <FiArrowLeft className="text-xl" />
+          <p className="text-sm sm:text-base">back</p>
         </button>
       </div>
 
-      <div className="container mx-auto rounded-md shadow-md max-w-5xl px-10 py-3 bg-white">
+      <div className="container mx-auto rounded-md shadow-md max-w-5xl sm:px-10 px-3 py-3 bg-white">
         <form>
-          <div className="flex flex-row space-x-4">
+          <div className="flex flex-row sm:space-x-4 space-x-2">
             <div className="basis-1/2">
               <InputLabel
                 labelValue={"Name"}
@@ -409,7 +420,8 @@ const Product = () => {
               />
             </div>
           </div>
-          <div className="flex flex-row space-x-4 max-w-sm">
+
+          <div className="flex flex-row sm:space-x-4 space-x-2 max-w-sm">
             <div className="">
               <InputLabel
                 labelValue={"inStock"}
@@ -442,8 +454,8 @@ const Product = () => {
             </div>
           </div>
 
-          <div className="flex flex-row space-x-4 items-end">
-            <div className="w-16">
+          <div className="flex sm:space-x-4 space-x-2 items-center">
+            <div className="sm:w-16">
               <InputLabel
                 labelValue={"Sizes"}
                 inputName={"size"}
@@ -454,16 +466,21 @@ const Product = () => {
                 className={"my-0"}
               />
             </div>
+
             <button
               onClick={handleSizeClick}
-              className="border bg-bs-blue text-white mt-8 py-1 px-3 text-sm self-center"
+              className="border bg-border-blue rounded shadow-md text-white mt-4 py-1 sm:px-3 px-2 sm:text-sm text-xs"
             >
-              Add size
+              Add
             </button>
-            <div className="size-bar">
+
+            <div className="size-bar flex gap-1 sm:gap-2 text-xs sm:text-sm">
               {size &&
                 size.map((size, index) => (
-                  <p key={size + index} className="border-dotted border px-2">
+                  <p
+                    key={size + index}
+                    className="border-dotted border sm:px-2 px-1 mt-4"
+                  >
                     <IoMdClose onClick={() => handleDeleteSize(size)} />
                     {size}
                   </p>
@@ -471,7 +488,7 @@ const Product = () => {
             </div>
           </div>
 
-          <div className="flex flex-row space-x-4 items-center align-middle">
+          <div className="flex flex-row sm:space-x-4 space-x-2 items-center align-middle">
             <div className="">
               <InputLabel
                 labelValue={"Color"}
@@ -482,21 +499,24 @@ const Product = () => {
                 handleInputChange={handleColorChange}
               />
             </div>
+
             <div className="">
               <InputLabel
-                labelValue={"Pick color shed"}
+                labelValue={"shed"}
                 inputName={"shed"}
                 placeHolder={"color shed"}
                 inputType={"color"}
                 inputValue={productShed.color}
                 handleInputChange={handleColorChange}
+                className={"text-xs"}
               />
             </div>
+
             <button
               onClick={handleAddColor}
-              className="border mt-10 py-1 px-3 bg-bs-blue text-white"
+              className="border mt-10 py-1 sm:px-3 text-xs sm:text-base px-2 self-center bg-border-blue rounded shadow-md text-white"
             >
-              Add color
+              Add
             </button>
           </div>
 
@@ -504,10 +524,13 @@ const Product = () => {
             {productState.color &&
               productState.color.map((sheds, index) => (
                 <div key={sheds + index} className="product-color-shed">
-                  <IoMdClose onClick={() => handleDeleteShed(index)} />
+                  <IoMdClose
+                    onClick={() => handleDeleteShed(index)}
+                    className="text-sm sm:text-base"
+                  />
                   <p
                     style={{ backgroundColor: sheds.shed }}
-                    className="product-shed-div"
+                    className="product-shed-div border"
                   ></p>
                   {sheds.color}
                 </div>
@@ -519,10 +542,10 @@ const Product = () => {
             {productState.color &&
               productState.color.map((item, count) => (
                 <div
-                  className="product-variant-container flex flex-row align-middle items-center my-6"
+                  className="product-variant-container text-xs sm:text-sm flex flex-col sm:flex-row sm:align-middle sm:items-center my-6"
                   key={item.color + count}
                 >
-                  <div className="variant-div">
+                  <div className="variant-div mb-2 sm:mb-0">
                     <label
                       className="mr-3"
                       style={{ color: item.shed }}
@@ -530,21 +553,24 @@ const Product = () => {
                     >
                       {item.color}
                     </label>
+
                     <input
                       type="file"
                       name={item.color}
                       multiple
                       id={item.color}
                       onChange={handleVariantImg}
-                      className="w-60"
+                      className="w-60 text-xs sm:text-sm"
                     />
                   </div>
+
                   <button
                     onClick={(e) => handleAddVariant(e, item.color)}
-                    className="bg-bs-blue text-white py-1 px-3"
+                    className="bg-border-blue text-white py-1 sm:px-3 px-2 rounded shadow-md self-start inline-block"
                   >
                     Add image
                   </button>
+
                   <div className="product-variant-images flex flex-row flex-wrap mx-2 gap-2">
                     {productState.variant &&
                       productState.variant
@@ -582,14 +608,16 @@ const Product = () => {
               {...getRootProps({ className: "dropzone" })}
             >
               <input {...getInputProps()} />
-              <p>Drag 'n' drop some files here, or click to select files</p>
+              <p className="text-xs sm:text-sm">
+                Drag 'n' drop some files here, or click to select files
+              </p>
             </div>
             <aside>
               {productState.images &&
                 productState.images.map((item, index) => (
                   <div className="product-image-div" key={item + index}>
                     <IoMdClose onClick={() => handleImgDelete(index)} />
-                    <img src={item} alt="" />
+                    <img src={item} alt="dress" />
                   </div>
                 ))}
               {uploadLoading && dropZone && (
@@ -607,36 +635,36 @@ const Product = () => {
           <section className="mark-down-section">
             <div className="mark-down-div flex align-middle items-center gap-6">
               <p
-                className="mark-down-btn bg-bs-blue text-white py-1 px-3"
+                className="mark-down-btn bg-border-blue rounded shadow-md text-white py-1 sm:px-3 px-2 text-sm sm:text-base"
                 onClick={() => handleMarkDownSelect("description")}
               >
                 Description
               </p>
-              <div className="mark-down-html">
+              <div className="mark-down-html text-xs sm:text-sm">
                 {productState.description && "Product description added"}
               </div>
             </div>
 
             <div className="mark-down-div flex align-middle items-center gap-6">
               <p
-                className="mark-down-btn bg-bs-blue text-white py-1 px-3"
+                className="mark-down-btn bg-border-blue rounded shadow-md text-white py-1 sm:px-3 px-2 text-sm sm:text-base"
                 onClick={() => handleMarkDownSelect("materials")}
               >
                 Material
               </p>
-              <div className="mark-down-html">
+              <div className="mark-down-html text-xs sm:text-sm">
                 {productState.materials && "Product materials added"}
               </div>
             </div>
 
             <div className="mark-down-div flex align-middle items-center gap-6">
               <p
-                className="mark-down-btn bg-bs-blue text-white py-1 px-3"
+                className="mark-down-btn bg-border-blue rounded shadow-md text-white py-1 sm:px-3 px-2 text-sm sm:text-base"
                 onClick={() => handleMarkDownSelect("careAdvice")}
               >
                 Care Advice
               </p>
-              <div className="mark-down-html">
+              <div className="mark-down-html text-xs sm:text-sm">
                 {productState.careAdvice && "Procuct Care advice"}
               </div>
             </div>
@@ -646,9 +674,9 @@ const Product = () => {
             <MdSection>
               <div className="mark-down-div">
                 <div className="mark-down-header">
-                  <p>{`Add product ${markDownText.text}`}</p>
+                  <p className="text-sm sm:text-base">{`Add product ${markDownText.text}`}</p>
                   <button className="close-btn">
-                    <IoMdClose onClick={handleCloseMarkDown} />
+                    <IoMdClose onClick={handleCloseMarkDown} className="text-3xl" />
                   </button>
                 </div>
                 <MdEditor
@@ -656,7 +684,7 @@ const Product = () => {
                   renderHTML={(text) => mdParser.render(text)}
                   onChange={handleEditorChange}
                 />
-                <button onClick={handleSaveMarkDown} className="save-btn">
+                <button onClick={handleSaveMarkDown} className="bg-border-blue rounded shadow-md text-white py-1 px-4 text-sm sm:text-base">
                   save
                 </button>
               </div>
@@ -666,7 +694,7 @@ const Product = () => {
           <div className="flex align-middle justify-end mb-4">
             <button
               type="submit"
-              className="bg-bs-blue rounded-md text-white py-2 px-6 flex items-center gap-2"
+              className="bg-border-blue text-sm sm:text-base rounded-md text-white py-2 sm:px-6 px-4 flex items-center gap-2"
               onClick={handleSubmit}
             >
               {(productLoading || updateLoading) && (

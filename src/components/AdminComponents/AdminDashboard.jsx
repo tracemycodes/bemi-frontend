@@ -72,8 +72,8 @@ const AdminDashboard = () => {
 
   return (
     <>
-      <div className="flex justify-between mb-12">
-        <h1 className="text-2xl text-font-blue">Product</h1>
+      <div className="flex justify-between sm:mb-12 mb-4">
+        <h1 className="sm:text-2xl text-xl text-font-blue">Product</h1>
         <form className="flex flex-col md:flex-row gap-4">
           <div className="flex gap-2 rounded-md items-center shadow-md bg-white pl-2">
             <label htmlFor="search" className="bg-white">
@@ -83,49 +83,48 @@ const AdminDashboard = () => {
               type="text"
               name="search"
               id="search"
-              className="py-2 w-80"
+              className="py-2 sm:w-80 text-sm border-0 outline-0"
             />
           </div>
-          <Link
-            to={"/admin/product/add"}
-            className=" justify-items-end ml-auto"
-          >
-            <button className="px-3 py-2 text-sm  bg-border-blue rounded shadow text-white flex items-center justify-between gap-2">
+
+          <Link to={"/admin/product/add"} className="justify-items-end ml-auto">
+            <button className="sm:px-3 px-2 sm:py-2 py-1 sm:text-sm text-xs bg-border-blue rounded shadow text-white flex items-center justify-between gap-2">
               Add Product
-              <MdOutlineAdd className="text-lg" />
+              <MdOutlineAdd className="sm:text-lg" />
             </button>
           </Link>
         </form>
       </div>
 
       <div className="relative pb-16 rounded-lg shadow-md bg-white">
-        <div className="rounded-lg bg-white px-6 py-3 overflow-x-auto relative">
+        <div className="rounded-lg bg-white sm:px-6 px-3 py-3 overflow-x-auto relative">
           <table className="w-full rounded-lg bg-white min-w-[50rem]">
             <thead className="text-text-header rounded-t-lg border-b border-text-para/40">
               <tr className="rounded-t-lg">
-                <th className="py-3 pl-3 text-sm font-light text-left text-text-para">
+                <th className="py-2 sm:py-3 pl-3 sm:text-sm text-xs font-light text-left text-text-para">
                   Product ID
                 </th>
-                <th className="py-3 text-sm font-light text-left text-text-para">
+                <th className="py-2 sm:py-3 sm:text-sm text-xs font-light text-left text-text-para">
                   Image
                 </th>
-                <th className="py-3 text-sm font-light text-left text-text-para">
+                <th className="py-2 sm:py-3 sm:text-sm text-xs font-light text-left text-text-para">
                   Product Name
                 </th>
-                <th className="py-3 text-sm font-light text-left text-text-para">
+                <th className="py-2 sm:py-3 sm:text-sm text-xs font-light text-left text-text-para">
                   Price
                 </th>
-                <th className="py-3 text-sm font-light text-left text-text-para">
+                <th className="py-2 sm:py-3 sm:text-sm text-xs font-light text-left text-text-para">
                   Num
                 </th>
-                <th className="py-3 text-sm font-light text-left text-text-para">
+                <th className="py-2 sm:py-3 sm:text-sm text-xs font-light text-left text-text-para">
                   Update
                 </th>
-                <th className="py-3 text-sm font-light text-left text-text-para">
+                <th className="py-2 sm:py-3 sm:text-sm text-xs font-light text-left text-text-para">
                   Delete
                 </th>
               </tr>
             </thead>
+
             {!request && (
               <tbody className="w-full relative">
                 {currentItems
@@ -137,18 +136,18 @@ const AdminDashboard = () => {
                         key={dress.name + index}
                       >
                         <td
-                          className="py-3 pl-3 cursor-pointer"
+                          className="sm:py-3 py-2 sm:pl-3 pl-2 cursor-pointer"
                           onClick={() =>
                             navigate(`/admin/product/view/${dress.name}`)
                           }
                         >
-                          <p className="text-xs flex gap-3">
-                            <IoMdOpen className="text-lg text-border-blue" />
+                          <p className="text-xs flex sm:gap-3 gap-2">
+                            <IoMdOpen className="sm:text-lg text-base text-border-blue" />
                             {dress._id.slice(-5)}
                           </p>
                         </td>
 
-                        <td className="py-3">
+                        <td className="sm:py-3 py-2">
                           <div className="w-9 rounded-sm">
                             <img
                               src={dress.images[0]}
@@ -160,23 +159,26 @@ const AdminDashboard = () => {
                         </td>
 
                         <td>
-                          <p className="">{dress.name}</p>
+                          <p className="text-sm sm:text-base">{dress.name}</p>
                         </td>
 
                         <td>
-                          <p className="text-sm">
+                          <p className="sm:text-sm text-xs">
                             #{dress.price.toLocaleString(`en-US`)}
                           </p>
                         </td>
 
                         <td>
-                          <p className="text-sm">{dress.inStock}</p>
+                          <p className="sm:text-sm text-xs">{dress.inStock}</p>
                         </td>
 
                         <td>
                           <div className="flex items-center align-middle">
                             <Link to={`/admin/product/${dress.name}`}>
-                              <FiEdit color="#0B90E2" />
+                              <FiEdit
+                                color="#0B90E2"
+                                className="sm:text-lg text-base"
+                              />
                             </Link>
                           </div>
                         </td>
@@ -186,7 +188,10 @@ const AdminDashboard = () => {
                             className="flex items-center align-middle cursor-pointer"
                             onClick={() => handleOpenModal(true, dress._id)}
                           >
-                            <MdDelete color="#ff3939d6" />
+                            <MdDelete
+                              color="#ff3939d6"
+                              className="sm:text-lg text-base"
+                            />
                           </div>
                         </td>
                       </tr>
@@ -220,19 +225,19 @@ const AdminDashboard = () => {
           </p>
           <ReactPaginate
             breakLabel="..."
-            nextLabel="next"
+            nextLabel=">"
             onPageChange={(e) => handlePageClick(e)}
             pageRangeDisplayed={4}
             pageCount={pageCount}
-            previousLabel="prev"
-            previousClassName="border border-black/5 bg-white shadow self-center flex justify-center align-middle mx-2 py-1 px-3 rounded"
+            previousLabel="<"
+            previousClassName="border border-black/5 bg-white shadow self-center flex justify-center align-middle sm:mx-2 text-xs sm:text-base mx-1 py-1 px-2 sm:px-3 rounded"
             previousLinkClassName="text-xs text-blue"
-            nextClassName="border border-black/5 bg-white shadow self-center flex justify-center align-middle mx-2 py-1 px-3 rounded"
+            nextClassName="border border-black/5 bg-white shadow self-center flex justify-center align-middle sm:mx-2 text-xs sm:text-base mx-1 py-1 px-2 sm:px-3 rounded"
             disabledClassName="border-gray-400"
             disabledLinkClassName="text-gray-400"
             nextLinkClassName="text-xs text-blue"
             containerClassName="flex"
-            pageClassName="text-gray-400 mx-2"
+            pageClassName="text-gray-300 sm:mx-2 mx-1"
             activeClassName="text-blue"
             activeLinkClassName="text-blue"
           />

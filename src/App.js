@@ -34,7 +34,9 @@ import ChangePassword from "./pages/ChangePassword/ChangePassword";
 import CategorySection from "./pages/CategorySection/CategorySection";
 // import { CategorySection } from "./pages/categoryPage/categoryStyle";
 
-const httpLink = new HttpLink({ uri: "https://good-rose-coral-fez.cyclic.app/graphql" });
+const httpLink = new HttpLink({
+  uri: "https://good-rose-coral-fez.cyclic.app/graphql",
+});
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   // add the authorization to the headers
@@ -64,11 +66,13 @@ const App = () => {
               <Route index element={<Home />} />
               <Route path="login" element={<LoginPage />} />
               <Route path="forgot-password" element={<ForgetPassword />} />
-              <Route path="change-password/:passId" element={<ChangePassword />} />
+              <Route
+                path="change-password/:passId"
+                element={<ChangePassword />}
+              />
               <Route path="signup" element={<SignUp />} />
               <Route path="product/:cloth" element={<ViewProduct />} />
               <Route path="category" element={<CategorySection />} />
-              {/* <Route path="category" element={<CategoryPage />} /> */}
               <Route path="nav" element={<SideNavMenu />} />
               <Route path="account" element={<Account />} />
               <Route path="account/address" element={<AccountForm />} />

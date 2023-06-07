@@ -24,8 +24,8 @@ const OrderPageLayout = () => {
   const pageCount = Math.ceil(orderList?.length / 7);
 
   useEffect(() => {
-    setOrderList(data?.orders)
-  },[data])
+    setOrderList(data?.orders);
+  }, [data]);
 
   const handleOpenModal = () => {
     setModal(!modal);
@@ -45,7 +45,9 @@ const OrderPageLayout = () => {
       );
     } else if (idx === 4) {
       setOrderList(
-        data.orders.filter((order) => order.status.toLowerCase() === "delivered")
+        data.orders.filter(
+          (order) => order.status.toLowerCase() === "delivered"
+        )
       );
     }
   };
@@ -68,18 +70,19 @@ const OrderPageLayout = () => {
 
   return (
     <div>
-      <h1 className="text-xl">Order History</h1>
+      <h1 className="sm:text-xl text-lg">Order History</h1>
 
-      <div className="mt-6 mb-4 flex justify-between align-middle items-center">
-        <div className="flex gap-6 text-base">
+      <div className="mt-6 mb-4 flex flex-col-reverse gap-4 sm:gap-0 sm:flex-row justify-between sm:align-middle sm:items-center">
+        <div className="flex sm:gap-6 gap-3 sm:text-base text-sm">
           <h4
             className={`${
               tabState === 1 && "text-border-blue border-b-2 border-border-blue"
             } cursor-pointer`}
             onClick={() => handleTab(1)}
           >
-            All Order
+            All
           </h4>
+
           <h4
             className={`${
               tabState === 2 && "text-border-blue border-b-2 border-border-blue"
@@ -88,6 +91,7 @@ const OrderPageLayout = () => {
           >
             Packed
           </h4>
+
           <h4
             className={`${
               tabState === 3 && "text-border-blue border-b-2 border-border-blue"
@@ -96,6 +100,7 @@ const OrderPageLayout = () => {
           >
             Shipped
           </h4>
+
           <h4
             className={`${
               tabState === 4 && "text-border-blue border-b-2 border-border-blue"
@@ -106,20 +111,20 @@ const OrderPageLayout = () => {
           </h4>
         </div>
 
-        <div className="flex gap-6 items-center">
+        <div className="flex gap-6 items-center text-sm sm:text-base">
           <input
             type="date"
             name="from"
             id="from"
-            className=" px-3 py-1 border border-border-blue rounded shadow"
+            className="px-3 py-1 border border-border-blue rounded shadow text-xs sm:text-base"
             onChange={handleDate}
-          />{" "}
+          />
           <p>to</p>
           <input
             type="date"
             name="to"
             id="to"
-            className=" px-3 py-1 border border-border-blue rounded shadow"
+            className="px-3 py-1 border border-border-blue rounded shadow text-xs sm:text-base"
             onChange={handleDate}
           />
         </div>
@@ -130,29 +135,30 @@ const OrderPageLayout = () => {
           <table className="w-full rounded-lg bg-white min-w-[50rem]">
             <thead className="text-text-header rounded-t-lg border-b border-text-para/40">
               <tr className="rounded-t-lg">
-                <th className="py-3 pl-3 text-sm font-light text-left text-text-para">
+                <th className="py-2 sm:py-3 pl-2 sm:pl-3 text-sm font-light text-left text-text-para">
                   Product ID
                 </th>
-                <th className="py-3 text-sm font-light text-left text-text-para">
+                <th className="py-2 sm:py-3 text-sm font-light text-left text-text-para">
                   Customer name
                 </th>
-                <th className="py-3 text-sm font-light text-text-para text-center">
+                <th className="py-2 sm:py-3 text-sm font-light text-text-para text-center">
                   No of items
                 </th>
-                <th className="py-3 text-sm font-light text-left text-text-para">
+                <th className="py-2 sm:py-3 text-sm font-light text-left text-text-para">
                   Date placed
                 </th>
-                <th className="py-3 text-sm font-light text-left text-text-para">
+                <th className="py-2 sm:py-3 text-sm font-light text-left text-text-para">
                   Status
                 </th>
-                <th className="py-3 text-sm font-light text-left text-text-para">
+                <th className="py-2 sm:py-3 text-sm font-light text-left text-text-para">
                   Amount
                 </th>
-                <th className="py-3 text-sm font-light text-left text-text-para">
+                <th className="py-2 sm:py-3 text-sm font-light text-left text-text-para">
                   Update
                 </th>
               </tr>
             </thead>
+
             {data && (
               <tbody className="w-full relative">
                 {currentItems
@@ -163,36 +169,48 @@ const OrderPageLayout = () => {
                         }`}
                         key={order._id + index}
                       >
-                        <td className="py-5 pl-3">
+                        <td className="py-4 sm:py-5 pl-2 sm:pl-3">
                           <p
                             className="text-xs flex gap-4 cursor-pointer items-center"
                             onClick={() => handleViewOrder(order._id)}
                           >
-                            <IoMdOpen className="text-lg text-border-blue"/>
+                            <IoMdOpen className="text-lg text-border-blue" />
                             {order.transactionId}
                           </p>
                         </td>
 
-                        <td className="py-5">
-                          <div className="rounded-sm">{order.email}</div>
+                        <td className="py-4 sm:py-5">
+                          <div className="rounded-sm text-sm sm:text-base">{order.email}</div>
                         </td>
 
                         <td>
-                          <p className="text-center">{order.products.reduce((acc, curr) => acc + parseInt(curr.count), 0)}</p>
+                          <p className="text-center text-sm sm:text-base">
+                            {order.products.reduce(
+                              (acc, curr) => acc + parseInt(curr.count),
+                              0
+                            )}
+                          </p>
                         </td>
 
                         <td>
-                          <p className="text-sm">{new Date(parseInt(order.createdAt)).toLocaleDateString()}</p>
+                          <p className="sm:text-sm text-xs">
+                            {new Date(
+                              parseInt(order.createdAt)
+                            ).toLocaleDateString()}
+                          </p>
                         </td>
 
                         <td>
                           <p
                             className={`text-sm ${
-                              order.orderStatus.status.toLowerCase() === "shipped"
+                              order.orderStatus.status.toLowerCase() ===
+                              "shipped"
                                 ? "text-[#E3D219]"
-                                : order.orderStatus.status.toLowerCase() === "packed"
+                                : order.orderStatus.status.toLowerCase() ===
+                                  "packed"
                                 ? "text-[#4380dc]"
-                                : order.orderStatus.status.toLowerCase() === "delivered"
+                                : order.orderStatus.status.toLowerCase() ===
+                                  "delivered"
                                 ? "text-[#22cd12]"
                                 : "text-black"
                             }`}
@@ -202,8 +220,11 @@ const OrderPageLayout = () => {
                         </td>
 
                         <td>
-                          <div className="flex items-center align-middle">
-                            {`#${order.products.reduce((acc, curr) => acc + parseInt(curr.price), 0)}`}
+                          <div className="flex items-center align-middle text-sm sm:text-base">
+                            {`#${order.products.reduce(
+                              (acc, curr) => acc + parseInt(curr.price),
+                              0
+                            )}`}
                           </div>
                         </td>
 
@@ -236,21 +257,23 @@ const OrderPageLayout = () => {
         )}
 
         <div
-          className=" absolute bottom-0 w-full left-0 flex items-center align-middle justify-between text-sm gap-10 h-16 px-6 bg-blue-light"
+          className="absolute bottom-0 w-full left-0 flex items-center align-middle justify-between text-xs sm:text-sm gap-10 h-16 px-3 sm:px-6 bg-blue-light"
           style={{ borderTop: "1px solid rgba(51, 125, 239, 0.2)" }}
         >
           <p className="opacity-30 text-xs">
             Showing deliverables from {itemOffset} to{" "}
-            {endOffset > currentItems?.length ? currentItems?.length : endOffset}{" "}
+            {endOffset > currentItems?.length
+              ? currentItems?.length
+              : endOffset}{" "}
             out of {orderList?.length}
           </p>
           <ReactPaginate
             breakLabel="..."
-            nextLabel="next"
+            nextLabel=">"
             onPageChange={(e) => handlePageClick(e)}
             pageRangeDisplayed={4}
             pageCount={pageCount}
-            previousLabel="prev"
+            previousLabel="<"
             previousClassName="border border-black/5 bg-white shadow self-center flex justify-center align-middle mx-2 py-1 px-3 rounded"
             previousLinkClassName="text-xs text-blue"
             nextClassName="border border-black/5 bg-white shadow self-center flex justify-center align-middle mx-2 py-1 px-3 rounded"
@@ -258,7 +281,7 @@ const OrderPageLayout = () => {
             disabledLinkClassName="text-gray-400"
             nextLinkClassName="text-xs text-blue"
             containerClassName="flex"
-            pageClassName="text-gray-400 mx-2"
+            pageClassName="text-gray-400 mx-2 text-xs sm:text-sm"
             activeClassName="text-blue"
             activeLinkClassName="text-blue"
           />
