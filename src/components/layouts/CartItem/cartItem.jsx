@@ -19,8 +19,6 @@ const CartItem = ({ product, handleCount, handleRemove }) => {
       setErrorMsg("");
     }
 
-    console.log(product.count, product.stock);
-
     if (
       parseInt(product.count) === 0 ||
       parseInt(product.count) === parseInt(product.stock)

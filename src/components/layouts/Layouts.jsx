@@ -20,7 +20,6 @@ function Layouts() {
       
     }
   }, [path, dispatch])
-
   return (
     <div>
       <Navbar />

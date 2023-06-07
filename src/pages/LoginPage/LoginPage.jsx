@@ -16,7 +16,7 @@ const LoginPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const bemiIvoryContext = useContext(BemiIvoryContext);
-  const { dispatch } = bemiIvoryContext;
+  const { state, dispatch } = bemiIvoryContext;
   const [contact, setContact] = useState({
     email: "",
     password: "",
@@ -35,7 +35,7 @@ const LoginPage = () => {
   useEffect(() => {
     const handleNavigation = () => {
       const previousPageUrl = window.history.state?.previousPage || "/";
-      console.log(previousPageUrl, 'okay');
+      console.log(previousPageUrl, "okay");
     };
 
     // Attach event listener to capture the navigation
@@ -60,8 +60,11 @@ const LoginPage = () => {
       });
       localStorage.setItem("token", data.loginUser.token);
       dispatch({ type: PROFILE_CHECK });
-      navigate(-1);
-      // navigate("/account");
+      if (state.purchase) {
+        navigate(-1);
+      } else {
+        navigate("/");
+      }
     }
     //eslint-disable-next-line
   }, [loading, data, error]);

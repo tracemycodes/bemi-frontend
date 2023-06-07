@@ -5,7 +5,8 @@ import {
   UPDATE_COUNT,
   NAVBAR_SHED,
   SAVE_ORDER,
-  PROFILE_CHECK
+  PROFILE_CHECK,
+  PURCHASE_REDIRECT,
 } from "../types";
 
 const bemiIvoryReducer = (state, action) => {
@@ -36,10 +37,14 @@ const bemiIvoryReducer = (state, action) => {
         order: action.payload,
       };
     case PROFILE_CHECK:
-      console.log('check');
       return {
         ...state,
         profile: state.profile ? false : true,
+      };
+    case PURCHASE_REDIRECT:
+      return {
+        ...state,
+        purchase: action.payload,
       };
 
     default:

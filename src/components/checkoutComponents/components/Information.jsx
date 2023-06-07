@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdAccountCircle } from "react-icons/md";
 import CheckModal from "./CheckModal";
 import { useForm } from "react-hook-form";
 import Error from "../../shared/Error/Error";
 
 const Information = ({ changeTabIndex, user }) => {
+  const navigate = useNavigate()
   const [modal, setModal] = useState(false);
-  const [shippingInfo, setShippingInfo] = useState({});
 
   const {
     handleSubmit,
@@ -29,9 +29,14 @@ const Information = ({ changeTabIndex, user }) => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    navigate('/login');
+  }
+
   return (
     <div className="">
-      <div className="flex justify-between mt-8">
+      <div className="flex justify-between mt-3 sm:mt-8">
         <h2>Contact information</h2>
         <div className="hidden">
           <p>Already have an account?</p>
@@ -42,17 +47,17 @@ const Information = ({ changeTabIndex, user }) => {
       </div>
 
       <div className="mt-4 flex items-center">
-        <MdAccountCircle className="text-6xl text-ash" />
+        <MdAccountCircle className="sm:text-6xl text-5xl text-ash" />
         {user ? (
           <div className="ml-3">
             <p>{`${user?.firstName + " " + user?.lastName} (${
               user?.email
             })`}</p>
-            <button className=" text-skyblue">Log out</button>
+            <button className="text-skyblue" onClick={handleLogout}>Log out</button>
           </div>
         ) : (
-          <div className="ml-3">
-            <p>Login to continue with checkout process</p>
+          <div className="ml-3 text-sm sm:text-base">
+            <p>Login to continue with checkout</p>
             <Link to={"/login"} className=" text-skyblue">
               Log in
             </Link>
@@ -61,16 +66,16 @@ const Information = ({ changeTabIndex, user }) => {
       </div>
 
       <form
-        className="mt-12 border-b border-darkgray"
+        className="sm:mt-12 mt-6 border-b border-darkgray"
         onSubmit={handleSubmit(handleShipping)}
       >
-        <h2 className="mb-5">Shipping address</h2>
+        <h2 className="sm:mb-5 mb-4">Shipping address</h2>
 
         <div className="relative">
           <select
             name="country"
             id="country"
-            className="w-full py-2 px-5 border border-ash rounded opacity-50"
+            className="w-full py-2 px-5 border border-ash rounded opacity-50 text-sm sm:text-base"
             {...register("country", {
               required: "Required",
             })}
@@ -85,14 +90,14 @@ const Information = ({ changeTabIndex, user }) => {
           <Error>{errors.country && errors.country.message}</Error>
         </div>
 
-        <div className="flex gap-4 my-7">
+        <div className="flex gap-4 sm:my-7 my-5">
           <div className="relative w-1/2">
             <input
               type="text"
               name="firstName"
               id="firstName"
               placeholder="First name"
-              className="py-2 px-5 w-full block border border-ash rounded opacity-90"
+              className="py-2 px-5 w-full block border border-ash rounded opacity-90 text-sm sm:text-base"
               {...register("firstName", {
                 required: "Required",
               })}
@@ -106,7 +111,7 @@ const Information = ({ changeTabIndex, user }) => {
               name="lastName"
               id="lastName"
               placeholder="Last name"
-              className="py-2 px-5 w-full border border-ash rounded opacity-90"
+              className="py-2 px-5 w-full border border-ash rounded opacity-90 text-sm sm:text-base"
               {...register("lastName", {
                 required: "Required",
               })}
@@ -121,7 +126,7 @@ const Information = ({ changeTabIndex, user }) => {
             name="address"
             id="address"
             placeholder="Address"
-            className="w-full py-2 px-5 border border-ash rounded opacity-90"
+            className="w-full py-2 px-5 border border-ash rounded opacity-90 text-sm sm:text-base"
             {...register("address", {
               required: "Required",
             })}
@@ -130,13 +135,13 @@ const Information = ({ changeTabIndex, user }) => {
           <Error>{errors.address && errors.address.message}</Error>
         </div>
 
-        <div className="my-7 relative">
+        <div className="sm:my-7 my-5 relative">
           <input
             type="text"
             name="apartment"
             id="suite"
             placeholder="Apartment, suite, etc. (optional)"
-            className="w-full py-2 px-5 border border-ash rounded opacity-90"
+            className="w-full py-2 px-5 border border-ash rounded opacity-90 text-sm sm:text-base"
             {...register("apartment", {
               required: "Required",
             })}
@@ -152,7 +157,7 @@ const Information = ({ changeTabIndex, user }) => {
               name="city"
               id="city"
               placeholder="City"
-              className="w-full py-2 px-5 border border-ash rounded opacity-90"
+              className="w-full py-2 px-5 border border-ash rounded opacity-90 text-sm sm:text-base"
               {...register("city", {
                 required: "Required",
               })}
@@ -164,7 +169,7 @@ const Information = ({ changeTabIndex, user }) => {
             <select
               name="country"
               id="state"
-              className="w-full py-2 px-5 border border-ash rounded opacity-50"
+              className="w-full py-2 px-5 border border-ash rounded opacity-50 text-sm sm:text-base"
               {...register("state", {
                 required: "Required",
               })}
@@ -185,7 +190,7 @@ const Information = ({ changeTabIndex, user }) => {
               name="zipCode"
               id="zipCode"
               placeholder="ZIP code"
-              className="w-full py-2 px-5 border border-ash rounded opacity-90"
+              className="w-full py-2 px-5 border border-ash rounded opacity-90 text-sm sm:text-base"
               {...register("zipCode", {
                 required: "Required",
               })}
@@ -194,13 +199,13 @@ const Information = ({ changeTabIndex, user }) => {
           </div>
         </div>
 
-        <div className="my-7 relative">
+        <div className="sm:my-7 my-5 relative">
           <input
             type="text"
             name="phone"
             id="phone"
             placeholder="Phone"
-            className="w-full py-2 px-5 border border-ash rounded opacity-90"
+            className="w-full py-2 px-5 border border-ash rounded opacity-90 text-sm sm:text-base"
             {...register("phone", {
               required: "Required",
             })}
@@ -208,25 +213,30 @@ const Information = ({ changeTabIndex, user }) => {
           <Error>{errors.phone && errors.phone.message}</Error>
         </div>
 
-        <div className="flex flex-col gap-2">
-          <div className="flex gap-3">
+        <div className="flex flex-col gap-2 my-3 sm:my-0">
+          <div className="flex gap-3 items-center">
             <input type="checkbox" name="addinfo" id="addinfo" />
-            <label htmlFor="addinfo" className="opacity-60">
+            <label
+              htmlFor="addinfo"
+              className="opacity-60 text-sm sm:text-base"
+            >
               Save this information for next time
             </label>
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-3 items-center">
             <input type="checkbox" name="newsLetter" id="newsLetter" />
-            <label htmlFor="newsLetter" className="opacity-60">
+            <label
+              htmlFor="newsLetter"
+              className="opacity-60 text-sm sm:text-base"
+            >
               Email me with news and offers
             </label>
           </div>
         </div>
 
-        <div className="flex justify-end mt-4 mb-12">
+        <div className="flex justify-end mt-4 sm:mb-12 mb-5">
           <button
-            className="bg-skyblue text-white py-3 px-7 rounded"
-            // onClick={handleShipping}
+            className="bg-skyblue text-white sm:py-3 py-2 sm:px-7 px-5 rounded text-sm sm:text-base"
             type="submit"
           >
             Continue to shipping

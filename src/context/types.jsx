@@ -4,3 +4,4 @@ export const UPDATE_COUNT = "UPDATE_COUNT";
 export const NAVBAR_SHED = "NAVBAR_SHED";
 export const SAVE_ORDER = "SAVE_ORDER";
 export const PROFILE_CHECK = "PROFILE_CHECK";
+export const PURCHASE_REDIRECT = "PURCHASE_REDIRECT";

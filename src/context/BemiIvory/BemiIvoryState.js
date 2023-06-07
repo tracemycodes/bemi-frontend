@@ -11,6 +11,7 @@ const BemiIvoryState = ({ children }) => {
     cartBag: 0,
     order: null,
     profile: false,
+    purchase: false,
   };
 
   const [state, dispatch] = useReducer(BemiIvoryReducer, initialState);

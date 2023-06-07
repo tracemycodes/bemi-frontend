@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { BsCart, BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { FiChevronRight } from "react-icons/fi";
@@ -10,8 +10,12 @@ import Information from "./components/Information";
 import Payment from "./components/Payment";
 import Shipping from "./components/Shipping";
 import { GET_USER } from "../../queries/userQuery";
+import BemiIvoryContext from "../../context/BemiIvory/bemiIvoryContext";
+import { PURCHASE_REDIRECT } from "../../context/types";
 
 const CheckoutLayout = () => {
+  const bemiIvoryContext = useContext(BemiIvoryContext);
+  const { dispatch } = bemiIvoryContext;
   const { orderID } = useParams();
   const [screen, setScreen] = useState(0);
   const [shipAddress, setShipAddress] = useState({
@@ -26,7 +30,6 @@ const CheckoutLayout = () => {
     phone: "",
     uuid: "",
   });
-  // const [userToken, setUserToken] = useLocalStorage('token', 'rer')
   const { loading, error, data } = useQuery(SINGLE_ORDER, {
     variables: { orderId: orderID },
   });
@@ -40,49 +43,64 @@ const CheckoutLayout = () => {
   useEffect(() => {
     if (userData) {
       setUser(userData?.getUser);
-      setShipAddress({...shipAddress, uuid: userData?.getUser._id})
+      setShipAddress({ ...shipAddress, uuid: userData?.getUser._id });
     }
-    //eslint-disable-next-line 
+    dispatch({ type: PURCHASE_REDIRECT, payload: true });
+    //eslint-disable-next-line
   }, [userLoading, userData, userError]);
-
-  // useEffect(() => {
-  //   console.log(orderID, data, error);
-  //   console.log(data?.singleOrder?.products, data, error);
-  // }, [data, error]);
 
   const [summary, setSummary] = useState(false);
 
   const changeTabIndex = (tab, data) => {
     setScreen(tab);
     if (tab === 1) {
-      setShipAddress({...shipAddress, ...data})
+      setShipAddress({ ...shipAddress, ...data });
     }
   };
 
   return (
     <div className="flex flex-col-reverse md:flex-row align-middle relative">
-      <div className="sm:w-11/12 mx-auto pt-6 md:pt-16 px-6 sm:pl-8 xl:pl-40 h-screen overflow-auto sm:pr-6 xl:pr-12 md:w-6/12 lg:w-7/12 flex flex-col">
+      <div className="sm:w-11/12 w-full mx-auto pt-6 md:pt-16 px-4 sm:pl-8 xl:pl-40 h-screen overflow-auto sm:pr-6 xl:pr-12 md:w-6/12 lg:w-7/12 flex flex-col">
         <Link className="text-2xl hidden md:flex">BEMI IVORY</Link>
-        <div className="flex gap-2 mb-4 md:my-4">
+        <div className="flex items-center gap-2 mb-4 md:my-4">
           <p className="flex items-center gap-2">
             Shipping <FiChevronRight />
           </p>
-          <p className="flex items-center gap-2 opacity-60">
+          <p
+            className={`flex items-center gap-2 ${
+              screen < 1 ? "opacity-40" : ""
+            }`}
+          >
             Information <FiChevronRight />
           </p>
-          <p className="flex items-center gap-2 opacity-60">
+          <p
+            className={`flex items-center gap-2 ${
+              screen < 2 ? "opacity-40" : ""
+            }`}
+          >
             Payment <FiChevronRight />
           </p>
         </div>
+
         {screen === 0 ? (
           <Information changeTabIndex={changeTabIndex} user={user} />
         ) : screen === 1 ? (
-          <Shipping changeTabIndex={changeTabIndex} user={user} shipAddress={shipAddress} />
+          <Shipping
+            changeTabIndex={changeTabIndex}
+            user={user}
+            shipAddress={shipAddress}
+          />
         ) : (
-          <Payment changeTabIndex={changeTabIndex} user={user} orderID={orderID} shipAddress={shipAddress} productData={data?.singleOrder?.products} />
+          <Payment
+            changeTabIndex={changeTabIndex}
+            user={user}
+            orderID={orderID}
+            shipAddress={shipAddress}
+            productData={data?.singleOrder?.products}
+          />
         )}
 
-        <div className="my-3 mt-auto justify-self-end flex gap-6 border-t border-darkgray pt-3">
+        <div className="my-3 mt-auto grid sm:grid-cols-4 grid-cols-2 place-content-between border-t border-darkgray pt-3">
           <Link className="text-sm text-skyblue">Refund policy</Link>
           <Link className="text-sm text-skyblue">Shipping policy</Link>
           <Link className="text-sm text-skyblue">Privacy policy</Link>
@@ -153,7 +171,7 @@ const CheckoutLayout = () => {
 
       <div className="md:hidden">
         <h2 className="text-2xl py-7 px-4 md:hidden">BEMI IVORY</h2>
-        <div className="flex justify-between py-6 px-6 border border-darkgray  bg-gray md:hidden">
+        <div className="flex justify-between sm:py-6 py-4 sm:px-6 px-3 border border-darkgray  bg-gray md:hidden text-sm">
           <div
             className="flex items-center align-middle cursor-pointer"
             onClick={() => setSummary(!summary)}

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Button from "../../shared/Button/button";
 import RightSideBar from "../../shared/RightSideBar/rightSideBar";
 import { BemiBag } from "./productCartStyle";
@@ -15,7 +15,7 @@ function ProductCart() {
   const bemiIvoryContext = useContext(BemiIvoryContext);
   const { dispatch } = bemiIvoryContext;
   const navigate = useNavigate();
-  const [showNote, setShowNote] = useState(true);
+  const [showNote, setShowNote] = useState(false);
 
   const [storage, setStorage] = useLocalStorage("ivoryStore", []);
 
@@ -70,16 +70,13 @@ function ProductCart() {
   }, [loading, data]);
 
   const handleCheckOut = () => {
-    console.log("object");
     addOrder([storage]);
   };
 
   return (
     <BemiBag>
       <RightSideBar title={"Your cart"}>
-        <div
-          className={"cartContainer"}
-        >
+        <div className={"cartContainer"}>
           {storage.length > 0 &&
             storage.map((item, index) => (
               <CartItem
@@ -129,6 +126,7 @@ function ProductCart() {
             buttonText="CHECKOUT"
             classnames="cartBtn mt-5"
             handleClick={handleCheckOut}
+            loading={loading}
           />
         </div>
       </RightSideBar>
