@@ -66,12 +66,12 @@ function ProductCart() {
     if (data) {
       navigate(`/checkout/${data.addOrder._id}`);
     }
+    dispatch({ type: "TOGGLE_CART" })
     //eslint-disable-next-line
   }, [loading, data]);
 
   const handleCheckOut = () => {
     addOrder([storage]);
-    dispatch({ type: "TOGGLE_CART" })
   };
 
   return (
