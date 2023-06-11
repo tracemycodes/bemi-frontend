@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   FiFacebook,
   FiInstagram,
@@ -12,15 +12,19 @@ import { BiShoppingBag } from "react-icons/bi";
 import { SideNav } from "./sideNavStyle";
 import { NavLink, Link } from "react-router-dom";
 import BemiIvoryContext from "../../../context/BemiIvory/bemiIvoryContext";
+import useExternalClick from "../../../hooks/useExternalHook";
 
 const SideNavMenu = () => {
   const bemiIvoryContext = useContext(BemiIvoryContext);
   const { state, dispatch } = bemiIvoryContext;
   const [toggle, setToggle] = useState(false);
+  const ref = useRef(null);
 
   useEffect(() => {
     setToggle(state.navBarState);
   }, [state.navBarState]);
+
+  useExternalClick(ref, () => dispatch({ type: "TOGGLE_NAVBAR" }));
 
   return (
     <>
@@ -28,6 +32,7 @@ const SideNavMenu = () => {
         <SideNav toggle={toggle}>
           <nav
             className={`sideNav h-screen w-72 bg-black text-white md:w-80 px-4 pt-8 `}
+            ref={ref}
           >
             <FiX
               onClick={() => dispatch({ type: "TOGGLE_NAVBAR" })}

@@ -35,7 +35,7 @@ import CategorySection from "./pages/CategorySection/CategorySection";
 // import { CategorySection } from "./pages/categoryPage/categoryStyle";
 
 const httpLink = new HttpLink({
-  uri: "http://localhost:8000/graphql",
+  uri: "https://good-rose-coral-fez.cyclic.app/graphql",
 });
 
 const authMiddleware = new ApolloLink((operation, forward) => {
