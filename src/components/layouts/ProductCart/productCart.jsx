@@ -65,8 +65,8 @@ function ProductCart() {
   useEffect(() => {
     if (data) {
       navigate(`/checkout/${data.addOrder._id}`);
+      dispatch({ type: "TOGGLE_CART" })
     }
-    dispatch({ type: "TOGGLE_CART" })
     //eslint-disable-next-line
   }, [loading, data]);
 
