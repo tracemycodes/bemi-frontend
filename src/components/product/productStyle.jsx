@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const FormSection = styled.section`
-  // position: relative;
   .mark-down-section {
     border-top: 2px solid black;
     padding: 1rem 0;
