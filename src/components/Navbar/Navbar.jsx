@@ -120,11 +120,11 @@ function Navbar() {
           <DropDown />
           <FiHeart />
 
-          <div className="shop-cart">
-            <BiShoppingBag onClick={() => dispatch({ type: "TOGGLE_CART" })} />
+          <div className="shop-cart" onClick={() => dispatch({ type: "TOGGLE_CART" })}>
+            <BiShoppingBag />
             <div className="cart-num">
               {cartItems > 0 && (
-                <span onClick={() => dispatch({ type: "TOGGLE_CART" })}>
+                <span>
                   {cartItems}
                 </span>
               )}
@@ -263,11 +263,11 @@ function Navbar() {
 
           <FiHeart />
 
-          <div className="shop-cart">
-            <BiShoppingBag onClick={() => dispatch({ type: "TOGGLE_CART" })} />
+          <div className="shop-cart" onClick={() => dispatch({ type: "TOGGLE_CART" })}>
+            <BiShoppingBag />
             <div className="cart-num">
               {state.cartBag > 0 && (
-                <span onClick={() => dispatch({ type: "TOGGLE_CART" })}>
+                <span>
                   {state.cartBag}
                 </span>
               )}
