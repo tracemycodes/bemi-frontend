@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from 'react';
 import {
   FiFacebook,
   FiInstagram,
@@ -7,24 +7,20 @@ import {
   FiUser,
   FiX,
   FiChevronRight,
-} from "react-icons/fi";
-import { BiShoppingBag } from "react-icons/bi";
-import { SideNav } from "./sideNavStyle";
-import { NavLink, Link } from "react-router-dom";
-import BemiIvoryContext from "../../../context/BemiIvory/bemiIvoryContext";
-import useExternalClick from "../../../hooks/useExternalHook";
+} from 'react-icons/fi';
+import { BiShoppingBag } from 'react-icons/bi';
+import { SideNav } from './sideNavStyle';
+import { NavLink, Link } from 'react-router-dom';
+import BemiIvoryContext from '../../../context/BemiIvory/bemiIvoryContext';
 
 const SideNavMenu = () => {
   const bemiIvoryContext = useContext(BemiIvoryContext);
   const { state, dispatch } = bemiIvoryContext;
   const [toggle, setToggle] = useState(false);
-  const ref = useRef(null);
 
   useEffect(() => {
     setToggle(state.navBarState);
   }, [state.navBarState]);
-
-  useExternalClick(ref, () => dispatch({ type: "TOGGLE_NAVBAR" }));
 
   return (
     <>
@@ -32,13 +28,13 @@ const SideNavMenu = () => {
         <SideNav toggle={toggle}>
           <nav
             className={`sideNav h-screen w-72 bg-black text-white md:w-80 px-4 pt-8 `}
-            ref={ref}
           >
             <FiX
-              onClick={() => dispatch({ type: "TOGGLE_NAVBAR" })}
-              size={"28"}
+              onClick={() => dispatch({ type: 'TOGGLE_NAVBAR' })}
+              size={'28'}
               className="cancelIcon flex justify-right text-right items-end cursor-pointer"
             />
+
             <div className="flex flex-row text-darkgray gap-x-4 text-lg justify-center mt-5">
               <a
                 href="https://facebook.com"
@@ -73,68 +69,71 @@ const SideNavMenu = () => {
                 <FiYoutube />
               </a>
             </div>
+
             <input
               type="text"
               className="w-full text-navlink bg-black outline-none searchInput mt-5 p-2 mb-2"
               placeholder="search"
             />
+
             <ul className="text-navlink text-xs">
               <li className="navLinkItem">
                 <NavLink
+                  onClick={() => dispatch({ type: 'TOGGLE_NAVBAR' })}
                   to="category"
                   className="flex flex-row justify-between items-center text-center py-3"
                 >
                   ALL PRODUCTS
-                  <FiChevronRight size={"20"} />
+                  <FiChevronRight size={'20'} />
                 </NavLink>
               </li>
+
               <li className="navLinkItem">
                 <NavLink
+                  onClick={() => dispatch({ type: 'TOGGLE_NAVBAR' })}
                   to="category"
                   className="flex flex-row justify-between items-center text-center py-4"
                 >
                   NEW IN
-                  <FiChevronRight size={"20"} />
+                  <FiChevronRight size={'20'} />
                 </NavLink>
               </li>
+
               <li className="navLinkItem">
                 <NavLink
+                  onClick={() => dispatch({ type: 'TOGGLE_NAVBAR' })}
                   to="category"
                   className="flex flex-row justify-between items-center text-center py-4"
                 >
                   SIGNATURE COLLECTION
-                  <FiChevronRight size={"20"} />
+                  <FiChevronRight size={'20'} />
                 </NavLink>
               </li>
+
               <li className="navLinkItem">
                 <NavLink
-                  to="category"
-                  className="flex flex-row justify-between items-center text-center py-4"
-                >
-                  KIDS
-                  <FiChevronRight size={"20"} />
-                </NavLink>
-              </li>
-              <li className="navLinkItem">
-                <NavLink
+                  onClick={() => dispatch({ type: 'TOGGLE_NAVBAR' })}
                   to="category"
                   className="flex flex-row justify-between items-center text-center py-4"
                 >
                   BEST SELLERS
-                  <FiChevronRight size={"20"} />
+                  <FiChevronRight size={'20'} />
                 </NavLink>
               </li>
+
               <li className="navLinkItem">
                 <NavLink
+                  onClick={() => dispatch({ type: 'TOGGLE_NAVBAR' })}
                   to="about-us"
                   className="flex flex-row justify-between items-center text-center py-4"
                 >
                   ABOUT US
-                  <FiChevronRight size={"20"} />
+                  <FiChevronRight size={'20'} />
                 </NavLink>
               </li>
+
               <li className="navLinkItem flex flex-row  items-center text-center py-4">
-                <FiUser size={"20"} />
+                <FiUser size={'20'} />
                 <Link to="/login" className="pl-4">
                   Login In/
                 </Link>
@@ -144,11 +143,12 @@ const SideNavMenu = () => {
               </li>
               <li className="navLinkItem cartLink mt-4">
                 <NavLink
+                  onClick={() => dispatch({ type: 'TOGGLE_NAVBAR' })}
                   to="about-us"
                   className="flex flex-row justify-between items-center text-center py-2.5 px-2"
                 >
                   CART
-                  <BiShoppingBag size={"20"} />
+                  <BiShoppingBag size={'20'} />
                 </NavLink>
               </li>
             </ul>

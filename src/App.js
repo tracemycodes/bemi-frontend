@@ -8,7 +8,6 @@ import SignUp from "./pages/SignUp/SignUp";
 import ViewProduct from "./pages/viewProductPage/ViewProduct";
 import ProductPage from "./pages/ProductPage/ProductPage";
 import ProductCart from "./components/layouts/ProductCart/productCart";
-import CategoryPage from "./pages/categoryPage/CategoryPage";
 import SideNavMenu from "./components/layouts/SideNavMenu/SideNavMenu";
 import BemiIvoryState from "./context/BemiIvory/BemiIvoryState";
 import {

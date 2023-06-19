@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Button from "../../shared/Button/button";
 import RightSideBar from "../../shared/RightSideBar/rightSideBar";
 import { BemiBag } from "./productCartStyle";
@@ -19,7 +19,7 @@ function ProductCart() {
 
   const [storage, setStorage] = useLocalStorage("ivoryStore", []);
 
-  const [addOrder, { data, loading, error }] = useMutation(ADD_ORDER, {
+  const [addOrder, { data, loading }] = useMutation(ADD_ORDER, {
     variables: {
       products: storage,
     },
@@ -64,8 +64,8 @@ function ProductCart() {
 
   useEffect(() => {
     if (data) {
-      navigate(`/checkout/${data.addOrder._id}`);
       dispatch({ type: "TOGGLE_CART" })
+      navigate(`/checkout/${data.addOrder._id}`);
     }
     //eslint-disable-next-line
   }, [loading, data]);

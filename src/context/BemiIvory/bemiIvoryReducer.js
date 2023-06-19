@@ -39,7 +39,7 @@ const bemiIvoryReducer = (state, action) => {
     case PROFILE_CHECK:
       return {
         ...state,
-        profile: state.profile ? false : true,
+        profile: action.payload,
       };
     case PURCHASE_REDIRECT:
       return {

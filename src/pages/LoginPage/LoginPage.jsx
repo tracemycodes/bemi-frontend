@@ -1,16 +1,16 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext, useEffect, useState } from "react";
-import InputLabel from "../../components/shared/inputLabel/inputLabel";
-import Button from "../../components/shared/Button/button";
-import GoogleLogo from "../../components/layouts/assets/googleLogo.png";
-import { Checkbox, LoginBtn } from "./LoginStyle";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useMutation } from "@apollo/client";
-import { LOGIN_CLIENT } from "../../mutations/clientMutations";
-import { FiEye, FiEyeOff } from "react-icons/fi";
-import { toast } from "react-toastify";
-import BemiIvoryContext from "../../context/BemiIvory/bemiIvoryContext";
-import { PROFILE_CHECK } from "../../context/types";
+import React, { useContext, useEffect, useState } from 'react';
+import InputLabel from '../../components/shared/inputLabel/inputLabel';
+import Button from '../../components/shared/Button/button';
+import GoogleLogo from '../../components/layouts/assets/googleLogo.png';
+import { Checkbox, LoginBtn } from './LoginStyle';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { LOGIN_CLIENT } from '../../mutations/clientMutations';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
+import { toast } from 'react-toastify';
+import BemiIvoryContext from '../../context/BemiIvory/bemiIvoryContext';
+import { PROFILE_CHECK } from '../../context/types';
 
 const LoginPage = () => {
   const location = useLocation();
@@ -18,8 +18,8 @@ const LoginPage = () => {
   const bemiIvoryContext = useContext(BemiIvoryContext);
   const { state, dispatch } = bemiIvoryContext;
   const [contact, setContact] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const [view, setView] = useState(false);
 
@@ -34,12 +34,12 @@ const LoginPage = () => {
 
   useEffect(() => {
     const handleNavigation = () => {
-      const previousPageUrl = window.history.state?.previousPage || "/";
-      console.log(previousPageUrl, "okay");
+      const previousPageUrl = window.history.state?.previousPage || '/';
+      console.log(previousPageUrl, 'okay');
     };
 
     // Attach event listener to capture the navigation
-    window.addEventListener("popstate", handleNavigation);
+    window.addEventListener('popstate', handleNavigation);
 
     // Clean up the event listener on component unmount
     // return () => {
@@ -49,30 +49,27 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (error) {
-      toast.error("Invalid login credentials", {
+      toast.error('Invalid login credentials', {
         pauseOnFocusLoss: false,
         position: toast.POSITION.TOP_RIGHT,
       });
     } else if (data) {
-      toast.success("Login successful", {
+      toast.success('Login successful', {
         pauseOnFocusLoss: false,
         position: toast.POSITION.TOP_RIGHT,
       });
-      localStorage.setItem("token", data.loginUser.token);
-      dispatch({ type: PROFILE_CHECK });
+      localStorage.setItem('token', data.loginUser.token);
+      dispatch({ type: PROFILE_CHECK, payload: true });
       console.log(data, data.loginUser.isAdmin, 'trtrt');
       if (data.loginUser.isAdmin) {
-        navigate('/admin')
-        return
+        navigate('/admin');
+        return;
       }
       if (state.purchase) {
         navigate(-1);
       } else {
-        navigate("/");
+        navigate('/');
       }
-      
-      
-      
     }
     //eslint-disable-next-line
   }, [loading, data, error]);
@@ -92,61 +89,68 @@ const LoginPage = () => {
 
   const handleGoogle = async (e) => {
     e.preventDefault();
-    window.open("http://localhost:8000/auth/google", "_self");
+    window.open(`${process.env.REACT_APP_SERVER_URL}/auth/google`, '_self');
   };
 
   return (
     <div className="w-full mb-12 mt-24 lg:mt-12 bg-white">
-      <div className="border w-11/12 mx-auto border-darkgray bg-white sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12 mt-12 p-6 rounded-md shadow-md">
+      <div className="border w-11/12 mx-auto border-darkgray bg-white sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-4/12 mt-12 p-4 sm:p-6 rounded-md shadow-md">
         <h1 className="text-xl font-semibold">Login</h1>
         <small className="text-ash">
           Welcome back! Please enter your details
         </small>
         <form>
           <InputLabel
-            labelValue={"Email"}
-            inputType={"text"}
-            inputName={"email"}
-            placeHolder={"Email address"}
+            labelValue={'Email'}
+            inputType={'text'}
+            inputName={'email'}
+            placeHolder={'Email address'}
             handleInputChange={handleOnChange}
             inputValue={email}
           />
+
           <div className="relative mb-4">
             <InputLabel
-              labelValue={"Password"}
-              inputType={view ? "text" : "password"}
-              inputName={"password"}
-              placeHolder={"Enter password"}
+              labelValue={'Password'}
+              inputType={view ? 'text' : 'password'}
+              inputName={'password'}
+              placeHolder={'Enter password'}
               handleInputChange={handleOnChange}
               inputValue={password}
             />
 
             {view ? (
               <FiEye
-                className=" absolute bottom-5 right-3 cursor-pointer"
+                className="absolute bottom-3 right-3 cursor-pointer"
                 onClick={handlePassView}
               />
             ) : (
               <FiEyeOff
-                className=" absolute bottom-5 right-3 cursor-pointer"
+                className="absolute bottom-3 right-3 cursor-pointer"
                 onClick={handlePassView}
               />
             )}
           </div>
-          <Checkbox>
-            <label className="termsChecked">
-              <input type="checkbox" />
-              <span className="checkmark"></span>
-            </label>
-            <p className="flex-1">Remember me</p>
+
+          <div className="mb-2 flex justify-between items-center">
+            <Checkbox>
+              <input type="checkbox" id="loginCheck" name="loginCheck" />
+              <label
+                className="termsChecked"
+                id="loginCheck"
+                htmlFor="loginCheck"
+              >
+                Remember me
+              </label>
+            </Checkbox>
             <Link className="forgetPassword text-skyblue" to="/forgot-password">
               Forgot Password?
             </Link>
-          </Checkbox>
+          </div>
 
           <LoginBtn>
             <Button
-              buttonText={"Sign In"}
+              buttonText={'Sign In'}
               classnames="loginBtn"
               handleClick={handleSignIn}
               loading={loading}
@@ -169,7 +173,7 @@ const LoginPage = () => {
               Don't have account?
             </span>
 
-            <Link to={"/signup"}>
+            <Link to={'/signup'}>
               <p className="text-xs font-semibold text-skyblue ml-1">Sign up</p>
             </Link>
           </div>

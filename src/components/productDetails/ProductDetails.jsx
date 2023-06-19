@@ -102,10 +102,12 @@ const ProductDetails = ({ product, isAdmin }) => {
         ${product?.price && product?.price.toLocaleString(`en-US`)}
       </p>
       <hr />
+
       <div className="product-size-guide">
         <FaPencilRuler />
         <button>size guide</button>
       </div>
+
       <div className="product-sizes">
         {!isAdmin && (
           <p>
@@ -122,6 +124,7 @@ const ProductDetails = ({ product, isAdmin }) => {
             ))}
         </div>
       </div>
+
       <div className="product-color">
         <p>
           <strong>Color:</strong>
@@ -139,6 +142,7 @@ const ProductDetails = ({ product, isAdmin }) => {
             ))}
         </div>
       </div>
+
       {!isAdmin && (
         <div className="product-quantity">
           <h3 className=" font-bold">Quantity</h3>
@@ -149,12 +153,13 @@ const ProductDetails = ({ product, isAdmin }) => {
           </div>
         </div>
       )}
+
       {!isAdmin && (
         <div className="product-purchase">
           <button onClick={handleAddCart}>Add to cart</button>
-          <button>Make purchase</button>
         </div>
       )}
+
       {!isAdmin && (
         <div className="product-contact">
           <h3>contact us</h3>
@@ -166,12 +171,14 @@ const ProductDetails = ({ product, isAdmin }) => {
           </div>
         </div>
       )}
+
       <section className="product-info">
         <div className="product-desc">
           <div className="info-div" onClick={() => handleAccordion(1)}>
             <h3>Description</h3>
             <FaAngleDown />
           </div>
+
           <AccordionDiv toggle={state === 1}>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit.
             Repudiandae, placeat ex illum mollitia accusantium, doloremque
@@ -179,6 +186,7 @@ const ProductDetails = ({ product, isAdmin }) => {
             Maiores, repellendus. Dolor nisi impedit necessitatibus!
           </AccordionDiv>
         </div>
+
         <div className="product-materials">
           <div className="info-div" onClick={() => handleAccordion(2)}>
             <h3>Materials</h3>
@@ -191,6 +199,7 @@ const ProductDetails = ({ product, isAdmin }) => {
             Maiores, repellendus. Dolor nisi impedit necessitatibus!
           </AccordionDiv>
         </div>
+
         <div className="product-care">
           <div className="info-div" onClick={() => handleAccordion(3)}>
             <h3>Care Advice</h3>
@@ -203,6 +212,7 @@ const ProductDetails = ({ product, isAdmin }) => {
             Maiores, repellendus. Dolor nisi impedit necessitatibus!
           </AccordionDiv>
         </div>
+
         <div className="product-about">
           <div className="info-div" onClick={() => handleAccordion(4)}>
             <h3>About Delivery</h3>

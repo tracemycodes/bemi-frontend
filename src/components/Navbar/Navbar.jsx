@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useState, useEffect, useContext } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import {
   FiFacebook,
   FiInstagram,
@@ -7,27 +7,26 @@ import {
   FiYoutube,
   FiSearch,
   FiMenu,
-  FiHeart,
-} from "react-icons/fi";
-import { BiShoppingBag } from "react-icons/bi";
-import { BemiNav } from "./NavbarStyle";
-import bemiLogo from "../../assets/images/bemi-logo.png";
-import SideNavMenu from "../layouts/SideNavMenu/SideNavMenu";
-import BemiIvoryContext from "../../context/BemiIvory/bemiIvoryContext";
-import useLocalStorage from "../../hooks/useLocalStorage";
-import DropDown from "../shared/DropDown/DropDown";
+} from 'react-icons/fi';
+import { BiShoppingBag } from 'react-icons/bi';
+import { BemiNav } from './NavbarStyle';
+import bemiLogo from '../../assets/images/bemi-logo.png';
+import SideNavMenu from '../layouts/SideNavMenu/SideNavMenu';
+import BemiIvoryContext from '../../context/BemiIvory/bemiIvoryContext';
+import useLocalStorage from '../../hooks/useLocalStorage';
+import DropDown from '../shared/DropDown/DropDown';
 
 function Navbar() {
   const bemiIvoryContext = useContext(BemiIvoryContext);
   const { state, dispatch } = bemiIvoryContext;
 
   const [navBar, setNavbar] = useState(false);
-  const [storage, setStorage] = useLocalStorage("ivoryStore", []);
+  const [storage /*setStorage*/] = useLocalStorage('ivoryStore', []);
   const [cartItems, setCartItems] = useState(0);
 
   useEffect(() => {
     changeBackground();
-    dispatch({ type: "UPDATE_COUNT", payload: storage.length });
+    dispatch({ type: 'UPDATE_COUNT', payload: storage.length });
 
     // eslint-disable-next-line
   }, []);
@@ -43,34 +42,34 @@ function Navbar() {
       setNavbar(false);
     }
   };
-  window.addEventListener("scroll", changeBackground);
+  window.addEventListener('scroll', changeBackground);
 
   let activeStyle = {
-    textDecoration: "underline",
+    textDecoration: 'underline',
   };
 
-  let activeClassName = "underline";
+  let activeClassName = 'underline';
 
   return (
     <BemiNav>
       <header
         className={`px-4 text-darkgray text-xl fixed top-0 left-0 lg:relative ${
-          navBar && "bg-black nav-active"
+          navBar && 'bg-black nav-active'
         } w-full flex flex-row items-center justify-between lg:px-6 pb-1 pt-2 ${
-          state.navBarShed && "bg-black nav-active"
+          state.navBarShed && 'bg-black nav-active'
         }`}
       >
         <FiMenu
-          size={"25"}
+          size={'25'}
           className="cursor-pointer lg:hidden"
-          onClick={() => dispatch({ type: "TOGGLE_NAVBAR" })}
+          onClick={() => dispatch({ type: 'TOGGLE_NAVBAR' })}
         />
 
         <div
           className={
             navBar
-              ? "hidden lg:flex text-center text-lg gap-x-2"
-              : "mediaIcons hidden lg:flex text-center text-lg gap-x-2"
+              ? 'hidden lg:flex text-center text-lg gap-x-2'
+              : 'mediaIcons hidden lg:flex text-center text-lg gap-x-2'
           }
         >
           <a
@@ -108,23 +107,22 @@ function Navbar() {
         </div>
 
         <Link
-          to={"/"}
-          onClick={() => dispatch({ type: "NAVBAR_SHED", payload: false })}
+          to={'/'}
+          onClick={() => dispatch({ type: 'NAVBAR_SHED', payload: false })}
         >
           <div className="w-28 md:w-40 lg:w-48">
             <img src={bemiLogo} alt="logo" srcSet="" />
           </div>
         </Link>
 
-        <div className="flex text-center text-lg gap-x-2 ">
+        <div className="flex text-center text-lg gap-x-2">
           <DropDown />
-          <FiHeart />
 
-          <div className="shop-cart" onClick={() => dispatch({ type: "TOGGLE_CART" })}>
-            <BiShoppingBag />
+          <div className="shop-cart">
+            <BiShoppingBag onClick={() => dispatch({ type: 'TOGGLE_CART' })} />
             <div className="cart-num">
               {cartItems > 0 && (
-                <span>
+                <span onClick={() => dispatch({ type: 'TOGGLE_CART' })}>
                   {cartItems}
                 </span>
               )}
@@ -140,13 +138,13 @@ function Navbar() {
           navBar
             ? `px-4 text-darkgray text-xl hidden lg:flex flex-row justify-between text-center items-center lg:px-6 py-3 fixed top-0 left-0 right-0 bg-black`
             : `px-4 text-darkgray text-xl hidden lg:flex flex-row justify-between text-center items-center lg:px-6 py-3 ${
-                state.navBarShed ? "bg-black" : ""
+                state.navBarShed ? 'bg-black' : ''
               }`
         }
       >
         <div
           className={
-            navBar ? "hidden lg:flex text-center text-lg gap-x-2" : "hidden"
+            navBar ? 'hidden lg:flex text-center text-lg gap-x-2' : 'hidden'
           }
         >
           <a
@@ -187,7 +185,7 @@ function Navbar() {
           <li className="">
             <NavLink
               to="category"
-              onClick={() => dispatch({ type: "NAVBAR_SHED", payload: true })}
+              onClick={() => dispatch({ type: 'NAVBAR_SHED', payload: true })}
               className={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
               ALL PRODUCTS
@@ -196,7 +194,7 @@ function Navbar() {
           <li>
             <NavLink
               to="category"
-              onClick={() => dispatch({ type: "NAVBAR_SHED", payload: true })}
+              onClick={() => dispatch({ type: 'NAVBAR_SHED', payload: true })}
               className={({ isActive }) =>
                 isActive ? activeClassName : undefined
               }
@@ -207,7 +205,7 @@ function Navbar() {
           <li>
             <NavLink
               to="category"
-              onClick={() => dispatch({ type: "NAVBAR_SHED", payload: true })}
+              onClick={() => dispatch({ type: 'NAVBAR_SHED', payload: true })}
             >
               {({ isActive }) => (
                 <span className={isActive ? activeClassName : undefined}>
@@ -219,7 +217,7 @@ function Navbar() {
           <li>
             <NavLink
               to="category"
-              onClick={() => dispatch({ type: "NAVBAR_SHED", payload: true })}
+              onClick={() => dispatch({ type: 'NAVBAR_SHED', payload: true })}
             >
               {({ isActive }) => (
                 <span className={isActive ? activeClassName : undefined}>
@@ -231,7 +229,7 @@ function Navbar() {
           <li>
             <NavLink
               to="category"
-              onClick={() => dispatch({ type: "NAVBAR_SHED", payload: true })}
+              onClick={() => dispatch({ type: 'NAVBAR_SHED', payload: true })}
             >
               {({ isActive }) => (
                 <span className={isActive ? activeClassName : undefined}>
@@ -243,7 +241,7 @@ function Navbar() {
           <li>
             <NavLink
               to="about-us"
-              onClick={() => dispatch({ type: "NAVBAR_SHED", payload: true })}
+              onClick={() => dispatch({ type: 'NAVBAR_SHED', payload: true })}
             >
               {({ isActive }) => (
                 <span className={isActive ? activeClassName : undefined}>
@@ -256,18 +254,18 @@ function Navbar() {
 
         <div
           className={
-            navBar ? "hidden lg:flex text-center text-lg gap-x-2" : "hidden"
+            navBar ? 'hidden lg:flex text-center text-lg gap-x-2' : 'hidden'
           }
         >
           <DropDown />
 
-          <FiHeart />
+          {/* <FiHeart /> */}
 
-          <div className="shop-cart" onClick={() => dispatch({ type: "TOGGLE_CART" })}>
-            <BiShoppingBag />
+          <div className="shop-cart">
+            <BiShoppingBag onClick={() => dispatch({ type: 'TOGGLE_CART' })} />
             <div className="cart-num">
               {state.cartBag > 0 && (
-                <span>
+                <span onClick={() => dispatch({ type: 'TOGGLE_CART' })}>
                   {state.cartBag}
                 </span>
               )}

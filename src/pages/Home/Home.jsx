@@ -1,37 +1,49 @@
-import React, { useEffect, useState } from "react";
-import Boutique from "../../components/layouts/assets/boutique.jpg";
-import Gallery from "../../components/productGallery/Gallery";
-import BrandBanner from "../../components/shared/BrandBanner/BrandBanner";
-import Category from "../../components/shopByCategory/Category";
-import Slider from "../../components/slider/Slider";
-import CategoryPreview from "../../components/categoryPreview/CategoryPreview";
-import BrandStory from "../../components/brandStory/BrandStory";
-import { useQuery } from "@apollo/client";
-import { ALL_PRODUCTS } from "../../queries/productQuery";
+import React, { useContext, useEffect, useState } from 'react';
+import Boutique from '../../components/layouts/assets/boutique.jpg';
+import Gallery from '../../components/productGallery/Gallery';
+import BrandBanner from '../../components/shared/BrandBanner/BrandBanner';
+import Category from '../../components/shopByCategory/Category';
+import Slider from '../../components/slider/Slider';
+import CategoryPreview from '../../components/categoryPreview/CategoryPreview';
+import BrandStory from '../../components/brandStory/BrandStory';
+import { useQuery } from '@apollo/client';
+import { ALL_PRODUCTS } from '../../queries/productQuery';
+import BemiIvoryContext from '../../context/BemiIvory/bemiIvoryContext';
+import { PROFILE_CHECK } from '../../context/types';
+import ProductLoader from '../../components/shared/ProductLoader/ProductLoader';
 
 function Home() {
+  const bemiIvoryContext = useContext(BemiIvoryContext);
+  const { dispatch } = bemiIvoryContext;
   const [sliderData, setSliderData] = useState({
     one: [],
     two: [],
   });
-  const { loading, error, data } = useQuery(ALL_PRODUCTS);
+  const { loading, data } = useQuery(ALL_PRODUCTS);
 
   useEffect(() => {
     const getClient = async () => {
       try {
         const res = await fetch(
-          `${"https://localhost:3000"}/auth/login/success`,
+          `${'http://localhost:8000/auth/login/success'}`,
           {
-            method: "GET",
+            method: 'GET',
           }
         );
 
-        console.log(res);
+        const resData = await res.json();
+
+        if (resData) {
+          localStorage.setItem('token', resData.token);
+          dispatch({ type: PROFILE_CHECK, payload: true });
+        }
       } catch (err) {
         console.log(err);
       }
     };
+
     getClient();
+    //eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -50,9 +62,9 @@ function Home() {
         <img src={Boutique} alt="hero" className="w-full h-full object-cover" />
       </div>
       <BrandBanner />
-      <Slider ProductData={sliderData.one} />
+      {loading ? <ProductLoader /> : <Slider ProductData={sliderData.one} />}
       <CategoryPreview />
-      <Slider ProductData={sliderData.two} />
+      {loading ? <ProductLoader /> : <Slider ProductData={sliderData.two} />}
       <BrandStory />
       <Gallery />
       <Category />

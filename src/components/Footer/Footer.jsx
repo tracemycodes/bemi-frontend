@@ -39,7 +39,7 @@ const Footer = () => {
         {/* service and security */}
         <section className="py-2.5 text-white w-full text-xs">
           <div
-            className="mb-4 flex justify-between items-center "
+            className="mb-4 flex justify-between items-center cursor-pointer "
             onClick={() => setClick(1)}
           >
             <h3 className="text-sm text-darkgray">SERVICE & SECURITY</h3>
@@ -77,7 +77,7 @@ const Footer = () => {
         {/* Shop */}
         <section className="py-2.5 text-white w-full text-xs">
           <div
-            className="mb-4 flex justify-between items-center"
+            className="mb-4 flex justify-between items-center cursor-pointer"
             onClick={() => setClick(2)}
           >
             <h3 className="text-sm text-darkgray">SHOP</h3>
@@ -106,7 +106,7 @@ const Footer = () => {
         {/* About us */}
         <section className="py-2.5 text-white w-full text-xs">
           <div
-            className="mb-4 flex justify-between items-center"
+            className="mb-4 flex justify-between items-center cursor-pointer"
             onClick={() => setClick(3)}
           >
             <h3 className="text-sm text-darkgray">ABOUT US</h3>

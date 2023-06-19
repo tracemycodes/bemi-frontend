@@ -5,14 +5,13 @@ import { BiLogIn } from "react-icons/bi";
 import { MdDashboard } from "react-icons/md";
 import { FiUser } from "react-icons/fi";
 import BemiIvoryContext from "../../../context/BemiIvory/bemiIvoryContext";
-import { PROFILE_CHECK } from "../../../context/types";
 
 
 
 export default function DropDown() {
   const navigate = useNavigate();
   const bemiIvoryContext = useContext(BemiIvoryContext);
-  const { state, dispatch } = bemiIvoryContext;
+  const { state } = bemiIvoryContext;
   const [userToken, setUserToken] = useState(() =>
     localStorage.getItem("token")
   );
@@ -47,7 +46,7 @@ export default function DropDown() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 top-0 z-10 mt-8 w-24 sm:w-36 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="absolute right-0 top-0 z-10 mt-8 min:w-[6rem] sm:w-36 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="p-2 sm:p-3 flex flex-col gap-2">
             {userToken ? (
               <>
