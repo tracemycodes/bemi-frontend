@@ -35,7 +35,6 @@ const LoginPage = () => {
   useEffect(() => {
     const handleNavigation = () => {
       const previousPageUrl = window.history.state?.previousPage || '/';
-      console.log(previousPageUrl, 'okay');
     };
 
     // Attach event listener to capture the navigation
