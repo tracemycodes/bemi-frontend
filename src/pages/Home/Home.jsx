@@ -25,7 +25,7 @@ function Home() {
     const getClient = async () => {
       try {
         const res = await fetch(
-          `${'http://localhost:8000/auth/login/success'}`,
+          `${'https://good-rose-coral-fez.cyclic.app/auth/login/success'}`,
           {
             method: 'GET',
           }
